@@ -4,6 +4,7 @@ import { FiFlag, FiMapPin } from 'react-icons/fi';
 import type { ExperienceEntry } from '../data/types';
 import { formatDuration, formatMonth } from '../utils/date';
 import TechChip from './TechChip';
+import { jsAnimated } from '../utils/motion';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -33,6 +34,7 @@ function CompanyCard({ entry, side }: { entry: ExperienceEntry; side: 'left' | '
 
   return (
     <motion.article
+      {...jsAnimated}
       className={`xp-card xp-card--${side}`}
       initial={{ opacity: 0, x: side === 'left' ? -48 : 48 }}
       whileInView={{ opacity: 1, x: 0 }}
@@ -138,6 +140,7 @@ export default function ExperienceTimeline({ entries }: { entries: ExperienceEnt
           return (
             <li key={entry.id} className={`timeline__item timeline__item--${side}`}>
               <motion.span
+                {...jsAnimated}
                 className="timeline__node"
                 initial={{ scale: 0.4, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}

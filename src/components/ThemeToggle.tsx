@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { FiMoon, FiSun } from 'react-icons/fi';
 import { useTheme } from '../context/ThemeContext';
+import { jsAnimated } from '../utils/motion';
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
@@ -16,6 +17,7 @@ export default function ThemeToggle() {
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={theme}
+          {...jsAnimated}
           className="theme-toggle__icon"
           initial={{ rotate: -90, scale: 0.4, opacity: 0 }}
           animate={{ rotate: 0, scale: 1, opacity: 1 }}

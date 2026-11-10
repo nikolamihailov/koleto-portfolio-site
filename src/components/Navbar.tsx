@@ -6,6 +6,7 @@ import { profile } from '../data/profile';
 import { useActiveSection } from '../hooks/useActiveSection';
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
+import { jsAnimated } from '../utils/motion';
 
 const LINKS = [
   { id: 'about', label: 'About' },
@@ -100,6 +101,7 @@ export default function Navbar() {
           <motion.div
             id="mobile-menu"
             className="nav__mobile"
+            {...jsAnimated}
             variants={panel}
             initial="hidden"
             animate="show"
@@ -107,7 +109,7 @@ export default function Navbar() {
           >
             <ul className="nav__mobile-links">
               {LINKS.map(({ id, label }, i) => (
-                <motion.li key={id} variants={panelItem}>
+                <motion.li key={id} {...jsAnimated} variants={panelItem}>
                   <Link
                     to={{ pathname: '/', hash: `#${id}` }}
                     className={`nav__mobile-link ${active === id ? 'is-active' : ''}`}
@@ -120,7 +122,7 @@ export default function Navbar() {
               ))}
             </ul>
 
-            <motion.div className="nav__mobile-footer" variants={panelItem}>
+            <motion.div className="nav__mobile-footer" {...jsAnimated} variants={panelItem}>
               <a href={`mailto:${profile.email}`} className="btn btn--primary">
                 Get in touch <FiArrowUpRight aria-hidden="true" />
               </a>

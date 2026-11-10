@@ -1,5 +1,6 @@
 import { motion, type Variants } from 'framer-motion';
 import type { ReactNode } from 'react';
+import { jsAnimated } from '../utils/motion';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -20,6 +21,7 @@ export function Reveal({ children, className, delay = 0, as = 'div' }: RevealPro
   const Tag = motion[as];
   return (
     <Tag
+      {...jsAnimated}
       className={className}
       initial="hidden"
       whileInView="show"

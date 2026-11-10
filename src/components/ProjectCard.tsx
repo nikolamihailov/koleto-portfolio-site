@@ -7,6 +7,7 @@ import { loadProjectDetail } from '../pages/lazyPages';
 import { imgSrc, imgSrcSet } from '../utils/images';
 import { revealItem } from './Reveal';
 import TechChip from './TechChip';
+import { jsAnimated } from '../utils/motion';
 
 const SPRING = { stiffness: 220, damping: 22, mass: 0.6 };
 
@@ -37,6 +38,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   return (
     <motion.article
       className="project-card"
+      {...jsAnimated}
       variants={revealItem}
       style={{ rotateX, rotateY, transformPerspective: 1000 }}
       onPointerMove={onMove}

@@ -2,6 +2,7 @@ import { AnimatePresence, motion, type PanInfo } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { imgSrc, imgSrcSet, preloadImage } from '../utils/images';
+import { jsAnimated } from '../utils/motion';
 
 const SWIPE = 60;
 // The stage spans the container (max 1200px minus gutters).
@@ -50,6 +51,7 @@ export default function Gallery({ images, title }: { images: string[]; title: st
             srcSet={imgSrcSet(images[index])}
             sizes={STAGE_SIZES}
             alt={`${title} — screenshot ${index + 1} of ${count}`}
+            {...jsAnimated}
             className="gallery__image"
             // The first slide is above the fold on the detail page
             fetchPriority={index === 0 ? 'high' : 'auto'}
