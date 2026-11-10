@@ -1,7 +1,8 @@
 import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 import type { Profile } from './types';
 
-// TODO: replace with real data
+const EMAIL = 'nikolam0612@gmail.com';
+
 export const profile: Profile = {
   name: 'Nikola Mihaylov',
   shortName: 'Nikola',
@@ -14,11 +15,11 @@ export const profile: Profile = {
     'When I am not coding, you will usually find me training, hiking in the mountains or flying my drone to capture views from above.',
   ],
   location: 'Sofia, Bulgaria',
-  email: 'hello@example.com',
+  email: EMAIL,
   cvUrl: '#',
   socials: [
     { label: 'GitHub', url: 'https://github.com/nikolamihailov', icon: FiGithub },
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/nikola-mihaylov/', icon: FiLinkedin },
-    { label: 'Email', url: 'mailto:hello@example.com', icon: FiMail },
+    { label: 'Email', url: `mailto:${EMAIL}`, icon: FiMail },
   ],
 };
