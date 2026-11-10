@@ -11,6 +11,7 @@ import {
   SiAngular,
   SiMongoose,
   SiJsonwebtokens,
+  SiReactrouter,
   SiExpress,
   SiFigma,
   SiFramer,
@@ -65,4 +66,5 @@ export const tech: Record<TechId, Tech> = {
   angular: { name: 'Angular', icon: SiAngular },
   mongoose: { name: 'Mongoose', icon: SiMongoose },
   jwt: { name: 'JWT', icon: SiJsonwebtokens },
+  reactrouter: { name: 'React Router', icon: SiReactrouter },
 };

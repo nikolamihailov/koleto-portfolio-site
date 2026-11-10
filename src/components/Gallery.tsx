@@ -40,7 +40,10 @@ export default function Gallery({ images, title }: { images: string[]; title: st
   return (
     <div className="gallery">
       <div className="gallery__stage">
-        <AnimatePresence initial={false} custom={dir} mode="popLayout">
+        {/* Default ("sync") mode: slides are absolutely positioned, so entering and exiting
+            images can overlap. mode="popLayout" re-mounted the entering image when the
+            exit finished, replaying its fade-in (visible as a twitch). */}
+        <AnimatePresence initial={false} custom={dir}>
           <motion.img
             key={index}
             src={imgSrc(images[index], 1600)}

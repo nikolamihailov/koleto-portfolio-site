@@ -31,7 +31,8 @@ export type TechId =
   | 'netlify'
   | 'angular'
   | 'mongoose'
-  | 'jwt';
+  | 'jwt'
+  | 'reactrouter';
 
 export interface Tech {
   name: string;

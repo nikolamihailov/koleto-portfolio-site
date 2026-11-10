@@ -4,6 +4,7 @@ const dir = (folder: string) => (file: string) => `/images/projects/${folder}/${
 const portfolio = dir('portfolio');
 const tennis = dir('tennis-court');
 const autohub = dir('autohub');
+const kolplace = dir('kolplace');
 
 // Newest first. The first image is the card thumbnail.
 // Put original screenshots in /images-src/projects/<project>/ and run `npm run images`;
@@ -56,11 +57,41 @@ export const projects: Project[] = [
       'AutoHub is a car marketplace with an Angular front end and a Node.js/Express REST API backed by MongoDB. Visitors can search and filter offers by brand, model or category, sort by price or date, and browse image galleries, with infinite scrolling throughout.',
       'Registered users manage their profile and their own car offers, mark cars as sold, save favourites and view all offers from a dealership. Admins get a central panel to manage users, categories and every offer. Authentication uses JWT with bcrypt-hashed passwords, and the UI combines custom components with Angular Material, animations and toast notifications.',
     ],
-    images: [autohub('01-home'), autohub('02-perks'), autohub('03-about'), autohub('04-contacts'), autohub('05-login')],
+    images: [
+      autohub('00-offers'),
+      autohub('01-home'),
+      autohub('02-perks'),
+      autohub('03-about'),
+      autohub('04-contacts'),
+      autohub('05-login'),
+    ],
     stack: ['angular', 'typescript', 'node', 'express', 'mongodb', 'mongoose', 'jwt'],
     liveUrl: 'https://autohub-k.netlify.app/home',
     repoUrl: 'https://github.com/nikolamihailov/AutoHub',
     year: 2025,
+    role: 'Full-stack developer',
+  },
+  {
+    slug: 'kolplace',
+    title: 'KolPlace',
+    summary: 'Full-stack e-commerce shop with carts, orders, reviews, Econt delivery and an admin panel with statistics.',
+    description: [
+      'KolPlace is an online shop built as the final project of the SoftUni React course, with a custom design and a REST API built from scratch on Node.js, Express and MongoDB. Visitors can browse, search, sort, filter and paginate products, view product galleries, reviews, similar and promoted products, and find the stores on a map.',
+      'Signed-in users manage a cart and favourites, write reviews with ratings, and place orders with delivery through the Econt API, while admins manage products, categories, stores, reviews and users and see sales statistics. Authentication uses JWT with bcrypt, Framer Motion drives the animations, and the site has light and dark themes that follow the browser preference.',
+    ],
+    images: [
+      kolplace('01-home'),
+      kolplace('02-home-dark'),
+      kolplace('03-category'),
+      kolplace('04-promotions'),
+      kolplace('05-stores'),
+      kolplace('06-about'),
+      kolplace('07-login'),
+    ],
+    stack: ['react', 'reactrouter', 'framer', 'node', 'express', 'mongodb', 'mongoose', 'jwt'],
+    liveUrl: 'https://kolplace.netlify.app/',
+    repoUrl: 'https://github.com/nikolamihailov/React-Projects/tree/main/kolplace%20-%20Final%20React%20Project%20SoftUni',
+    year: 2023,
     role: 'Full-stack developer',
   },
 ];
