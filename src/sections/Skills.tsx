@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import { RevealGroup, revealItem } from '../components/Reveal';
 import SectionHeader from '../components/SectionHeader';
@@ -15,11 +16,12 @@ export default function Skills() {
               <h3 className="skill-group__title">{group.title}</h3>
               <ul className="skill-group__list">
                 {group.items.map((id) => {
-                  const { name, icon: Icon } = tech[id];
+                  const { name, icon: Icon, color, onDark } = tech[id];
                   return (
                     <motion.li
                       key={id}
                       className="skill"
+                      style={{ '--brand': color, '--brand-on-dark': onDark } as CSSProperties}
                       whileHover={{ y: -4, scale: 1.04 }}
                       transition={{ type: 'spring', stiffness: 400, damping: 18 }}
                     >

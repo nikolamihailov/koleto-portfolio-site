@@ -178,14 +178,23 @@
     border-color $duration-base $ease-out,
     box-shadow $duration-base $ease-out;
 
+  // Brand colour per chip, set inline from the tech data. Black/near-black brands have no
+  // --brand-on-dark and fall back to the text colour on the dark theme; the light theme
+  // can show every brand in its own colour.
+  --chip-color: var(--brand-on-dark, var(--text));
+
+  [data-theme='light'] & {
+    --chip-color: var(--brand, var(--accent));
+  }
+
   &__icon {
     font-size: 1.15rem;
-    color: var(--accent);
+    color: var(--chip-color);
   }
 
   @include hover {
-    border-color: var(--accent);
-    box-shadow: 0 8px 22px -12px var(--accent-glow);
+    border-color: color-mix(in srgb, var(--chip-color) 65%, transparent);
+    box-shadow: 0 8px 22px -12px color-mix(in srgb, var(--chip-color) 60%, transparent);
   }
 }
 

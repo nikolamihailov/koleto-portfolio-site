@@ -37,6 +37,10 @@ export type TechId =
 export interface Tech {
   name: string;
   icon: IconType;
+  /** Official brand colour, e.g. `#61DAFB`. */
+  color: string;
+  /** Brand colour if it stays legible on the dark theme, otherwise undefined. */
+  onDark?: string;
 }
 
 export interface Profile {

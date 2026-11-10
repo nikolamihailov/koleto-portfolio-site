@@ -32,39 +32,98 @@ import {
   SiTypescript,
   SiVite,
 } from 'react-icons/si';
+import {
+  siReact,
+  siTypescript,
+  siJavascript,
+  siNodedotjs,
+  siExpress,
+  siNextdotjs,
+  siMongodb,
+  siPostgresql,
+  siSass,
+  siTailwindcss,
+  siThreedotjs,
+  siRedux,
+  siVite,
+  siDocker,
+  siGit,
+  siFigma,
+  siHtml5,
+  siPython,
+  siFramer,
+  siJest,
+  siCss,
+  siOpenjdk,
+  siPhp,
+  siWordpress,
+  siPrisma,
+  siZod,
+  siVercel,
+  siNetlify,
+  siAngular,
+  siMongoose,
+  siJsonwebtokens,
+  siReactrouter,
+} from 'simple-icons';
 import type { Tech, TechId } from './types';
 
+/**
+ * A brand's official colour (from simple-icons) plus the colour to draw it in on the
+ * dark theme. Several brands are black or near-black (Next.js, Express, Three.js…) and
+ * would vanish on the near-black surface, so anything under 2:1 contrast against it
+ * gets no `onDark` and the icon falls back to the text colour — which is how those
+ * brands present themselves on dark backgrounds anyway.
+ */
+function brand({ hex }: { hex: string }): Pick<Tech, 'color' | 'onDark'> {
+  const color = `#${hex}`;
+  return { color, onDark: contrast(hex, '081014') >= 2 ? color : undefined };
+}
+
+function luminance(hex: string) {
+  const [r, g, b] = [0, 2, 4].map((i) => {
+    const c = parseInt(hex.slice(i, i + 2), 16) / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function contrast(a: string, b: string) {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
+}
+
 export const tech: Record<TechId, Tech> = {
-  react: { name: 'React', icon: SiReact },
-  typescript: { name: 'TypeScript', icon: SiTypescript },
-  javascript: { name: 'JavaScript', icon: SiJavascript },
-  node: { name: 'Node.js', icon: SiNodedotjs },
-  express: { name: 'Express', icon: SiExpress },
-  nextjs: { name: 'Next.js', icon: SiNextdotjs },
-  mongodb: { name: 'MongoDB', icon: SiMongodb },
-  postgresql: { name: 'PostgreSQL', icon: SiPostgresql },
-  sass: { name: 'SCSS', icon: SiSass },
-  tailwind: { name: 'Tailwind', icon: SiTailwindcss },
-  threejs: { name: 'Three.js', icon: SiThreedotjs },
-  redux: { name: 'Redux', icon: SiRedux },
-  vite: { name: 'Vite', icon: SiVite },
-  docker: { name: 'Docker', icon: SiDocker },
-  git: { name: 'Git', icon: SiGit },
-  figma: { name: 'Figma', icon: SiFigma },
-  html: { name: 'HTML5', icon: SiHtml5 },
-  python: { name: 'Python', icon: SiPython },
-  framer: { name: 'Framer Motion', icon: SiFramer },
-  jest: { name: 'Jest', icon: SiJest },
-  css: { name: 'CSS', icon: SiCss3 },
-  java: { name: 'Java', icon: SiOpenjdk },
-  php: { name: 'PHP', icon: SiPhp },
-  wordpress: { name: 'WordPress', icon: SiWordpress },
-  prisma: { name: 'Prisma', icon: SiPrisma },
-  zod: { name: 'Zod', icon: SiZod },
-  vercel: { name: 'Vercel', icon: SiVercel },
-  netlify: { name: 'Netlify', icon: SiNetlify },
-  angular: { name: 'Angular', icon: SiAngular },
-  mongoose: { name: 'Mongoose', icon: SiMongoose },
-  jwt: { name: 'JWT', icon: SiJsonwebtokens },
-  reactrouter: { name: 'React Router', icon: SiReactrouter },
+  react: { name: 'React', icon: SiReact, ...brand(siReact) },
+  typescript: { name: 'TypeScript', icon: SiTypescript, ...brand(siTypescript) },
+  javascript: { name: 'JavaScript', icon: SiJavascript, ...brand(siJavascript) },
+  node: { name: 'Node.js', icon: SiNodedotjs, ...brand(siNodedotjs) },
+  express: { name: 'Express', icon: SiExpress, ...brand(siExpress) },
+  nextjs: { name: 'Next.js', icon: SiNextdotjs, ...brand(siNextdotjs) },
+  mongodb: { name: 'MongoDB', icon: SiMongodb, ...brand(siMongodb) },
+  postgresql: { name: 'PostgreSQL', icon: SiPostgresql, ...brand(siPostgresql) },
+  sass: { name: 'SCSS', icon: SiSass, ...brand(siSass) },
+  tailwind: { name: 'Tailwind', icon: SiTailwindcss, ...brand(siTailwindcss) },
+  threejs: { name: 'Three.js', icon: SiThreedotjs, ...brand(siThreedotjs) },
+  redux: { name: 'Redux', icon: SiRedux, ...brand(siRedux) },
+  vite: { name: 'Vite', icon: SiVite, ...brand(siVite) },
+  docker: { name: 'Docker', icon: SiDocker, ...brand(siDocker) },
+  git: { name: 'Git', icon: SiGit, ...brand(siGit) },
+  figma: { name: 'Figma', icon: SiFigma, ...brand(siFigma) },
+  html: { name: 'HTML5', icon: SiHtml5, ...brand(siHtml5) },
+  python: { name: 'Python', icon: SiPython, ...brand(siPython) },
+  framer: { name: 'Framer Motion', icon: SiFramer, ...brand(siFramer) },
+  jest: { name: 'Jest', icon: SiJest, ...brand(siJest) },
+  css: { name: 'CSS', icon: SiCss3, ...brand(siCss) },
+  java: { name: 'Java', icon: SiOpenjdk, ...brand(siOpenjdk) },
+  php: { name: 'PHP', icon: SiPhp, ...brand(siPhp) },
+  wordpress: { name: 'WordPress', icon: SiWordpress, ...brand(siWordpress) },
+  prisma: { name: 'Prisma', icon: SiPrisma, ...brand(siPrisma) },
+  zod: { name: 'Zod', icon: SiZod, ...brand(siZod) },
+  vercel: { name: 'Vercel', icon: SiVercel, ...brand(siVercel) },
+  netlify: { name: 'Netlify', icon: SiNetlify, ...brand(siNetlify) },
+  angular: { name: 'Angular', icon: SiAngular, ...brand(siAngular) },
+  mongoose: { name: 'Mongoose', icon: SiMongoose, ...brand(siMongoose) },
+  jwt: { name: 'JWT', icon: SiJsonwebtokens, ...brand(siJsonwebtokens) },
+  reactrouter: { name: 'React Router', icon: SiReactrouter, ...brand(siReactrouter) },
 };
