@@ -5,8 +5,8 @@ import { imgSrc, imgSrcSet, preloadImage } from '../utils/images';
 import { jsAnimated } from '../utils/motion';
 
 const SWIPE = 60;
-// The stage spans the container (max 1200px minus gutters).
-const STAGE_SIZES = '(min-width: 1240px) 1140px, calc(100vw - 2rem)';
+// The gallery is capped at 900px (see _gallery.scss); below that it spans the width minus gutters.
+const STAGE_SIZES = '(min-width: 964px) 900px, calc(100vw - 2rem)';
 
 export default function Gallery({ images, title }: { images: string[]; title: string }) {
   const [[index, dir], setState] = useState<[number, number]>([0, 0]);

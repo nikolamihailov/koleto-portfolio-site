@@ -3,6 +3,10 @@
 .gallery {
   display: grid;
   gap: 1rem;
+  // Narrower than the page container so the main image isn't overwhelming on desktop
+  // (keep in sync with STAGE_SIZES in Gallery.tsx)
+  max-width: 900px;
+  margin-inline: auto;
 
   &__stage {
     position: relative;
