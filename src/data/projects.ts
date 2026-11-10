@@ -5,6 +5,7 @@ const portfolio = dir('portfolio');
 const tennis = dir('tennis-court');
 const autohub = dir('autohub');
 const kolplace = dir('kolplace');
+const solar = dir('solar-system');
 
 // Newest first. The first image is the card thumbnail.
 // Put original screenshots in /images-src/projects/<project>/ and run `npm run images`;
@@ -93,6 +94,21 @@ export const projects: Project[] = [
     repoUrl: 'https://github.com/nikolamihailov/React-Projects/tree/main/kolplace%20-%20Final%20React%20Project%20SoftUni',
     year: 2023,
     role: 'Full-stack developer',
+  },
+  {
+    slug: 'solar-system-planets',
+    title: 'Solar System Planets',
+    summary: 'Interactive guide to the planets of the solar system over an animated three.js starfield.',
+    description: [
+      'A small React and TypeScript app that presents the eight planets of the solar system over an animated three.js starfield rendered with React Three Fiber. Planet data is fetched from a REST API, with all requests sent in parallel and a loading spinner while they resolve.',
+      'Selecting a planet opens a detail view with its image, type, description, year length and number of moons, plus a link to read more on Wikipedia. An optional ambient space soundtrack can be toggled from the corner, and heavier parts of the UI are lazy-loaded.',
+    ],
+    images: [solar('01-overview'), solar('02-saturn'), solar('03-mars')],
+    stack: ['react', 'typescript', 'threejs', 'vite'],
+    liveUrl: 'https://planets-sl.netlify.app/',
+    repoUrl: 'https://github.com/nikolamihailov/React-Projects/tree/main/solar-system-planets',
+    year: 2023,
+    role: 'Solo project',
   },
 ];
 
