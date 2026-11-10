@@ -72,9 +72,31 @@
     font-size: 0.8rem;
     font-weight: 600;
     white-space: nowrap;
+    transition:
+      background-color 450ms $ease-out,
+      border-color 450ms $ease-out,
+      color 450ms $ease-out,
+      box-shadow 450ms $ease-out;
 
     svg {
       color: var(--accent);
+      transform-origin: 15% 90%; // the flagpole's base
+      transition: color 450ms $ease-out;
+    }
+
+    // The scroll line has filled all the way down to the start
+    &.is-active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-contrast);
+      box-shadow:
+        0 0 0 4px var(--accent-soft),
+        0 0 24px var(--accent-glow);
+
+      svg {
+        color: var(--accent-contrast);
+        animation: flag-wave 700ms $ease-out;
+      }
     }
   }
 
@@ -316,5 +338,19 @@
     flex-wrap: wrap;
     gap: 0.4rem;
     margin-top: 0.85rem;
+  }
+}
+
+// Small wave of the flag when the timeline reaches "Where it all started"
+@keyframes flag-wave {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  30% {
+    transform: rotate(-14deg) scale(1.15);
+  }
+  60% {
+    transform: rotate(8deg) scale(1.05);
   }
 }

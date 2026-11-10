@@ -1,5 +1,5 @@
-import { motion, useScroll, useSpring } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useMotionValueEvent, useScroll, useSpring } from 'framer-motion';
+import { useRef, useState } from 'react';
 import { FiFlag, FiMapPin } from 'react-icons/fi';
 import type { ExperienceEntry } from '../data/types';
 import { formatDuration, formatMonth } from '../utils/date';
@@ -124,6 +124,14 @@ export default function ExperienceTimeline({ entries }: { entries: ExperienceEnt
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 75%', 'end 60%'] });
   const fill = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
 
+  // Light up "Where it all started" once the line has filled down to it. Separate on/off
+  // thresholds stop it flickering when the scroll comes to rest right at the edge.
+  const [reachedStart, setReachedStart] = useState(false);
+  useMotionValueEvent(fill, 'change', (v) => {
+    if (v >= 0.985) setReachedStart(true);
+    else if (v < 0.95) setReachedStart(false);
+  });
+
   return (
     <div ref={ref} className="timeline">
       <div className="timeline__track" aria-hidden="true">
@@ -156,7 +164,7 @@ export default function ExperienceTimeline({ entries }: { entries: ExperienceEnt
       </ol>
 
       <div className="timeline__cap timeline__cap--bottom">
-        <span className="timeline__start">
+        <span className={`timeline__start ${reachedStart ? 'is-active' : ''}`}>
           <FiFlag aria-hidden="true" /> Where it all started
         </span>
       </div>
