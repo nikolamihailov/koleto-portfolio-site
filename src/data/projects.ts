@@ -19,6 +19,7 @@ export const projects: Project[] = [
     ],
     images: [portfolio('01-hero'), portfolio('02-about'), portfolio('03-experience'), portfolio('04-light')],
     stack: ['react', 'typescript', 'threejs', 'sass', 'framer', 'vite', 'netlify'],
+    liveUrl: 'https://koleto.eu',
     repoUrl: 'https://github.com/nikolamihailov/koleto-portfolio-site',
     year: 2026,
     role: 'Design & development',
