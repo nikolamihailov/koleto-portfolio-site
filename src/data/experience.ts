@@ -11,7 +11,7 @@ export const experience: ExperienceEntry[] = [
     location: 'Remote',
     roles: [
       {
-        title: 'Regular Front-end Developer',
+        title: 'Regular Full-stack Developer',
         employmentType: 'Full-time',
         start: '2026-03',
         description:
@@ -19,7 +19,7 @@ export const experience: ExperienceEntry[] = [
         stack: ['react', 'typescript', 'javascript'],
       },
       {
-        title: 'Junior Front-end Developer',
+        title: 'Junior Full-stack Developer',
         employmentType: 'Full-time',
         start: '2025-01',
         end: '2026-03',
