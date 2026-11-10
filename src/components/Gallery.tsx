@@ -1,8 +1,11 @@
 import { AnimatePresence, motion, type PanInfo } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { imgSrc, imgSrcSet, preloadImage } from '../utils/images';
 
 const SWIPE = 60;
+// The stage spans the container (max 1200px minus gutters).
+const STAGE_SIZES = '(min-width: 1240px) 1140px, calc(100vw - 2rem)';
 
 export default function Gallery({ images, title }: { images: string[]; title: string }) {
   const [[index, dir], setState] = useState<[number, number]>([0, 0]);
@@ -12,6 +15,13 @@ export default function Gallery({ images, title }: { images: string[]; title: st
     (step: number) => setState(([i]) => [(i + step + count) % count, step]),
     [count],
   );
+
+  // Preload the neighbouring slides so arrows/swipes show the next image instantly.
+  useEffect(() => {
+    if (count < 2) return;
+    preloadImage(images[(index + 1) % count], STAGE_SIZES);
+    preloadImage(images[(index - 1 + count) % count], STAGE_SIZES);
+  }, [index, images, count]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -33,9 +43,13 @@ export default function Gallery({ images, title }: { images: string[]; title: st
         <AnimatePresence initial={false} custom={dir} mode="popLayout">
           <motion.img
             key={index}
-            src={images[index]}
+            src={imgSrc(images[index], 1600)}
+            srcSet={imgSrcSet(images[index])}
+            sizes={STAGE_SIZES}
             alt={`${title} — screenshot ${index + 1} of ${count}`}
             className="gallery__image"
+            // The first slide is above the fold on the detail page
+            fetchPriority={index === 0 ? 'high' : 'auto'}
             custom={dir}
             variants={{
               enter: (d: number) => ({ opacity: 0, x: d >= 0 ? 80 : -80, scale: 0.98 }),
@@ -80,7 +94,8 @@ export default function Gallery({ images, title }: { images: string[]; title: st
                 aria-label={`Show screenshot ${i + 1}`}
                 aria-current={i === index}
               >
-                <img src={src} alt="" loading="lazy" />
+                {/* Thumbnails always use the smallest size */}
+                <img src={imgSrc(src, 480)} alt="" width={480} height={300} loading="lazy" decoding="async" />
               </button>
             </li>
           ))}

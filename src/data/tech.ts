@@ -8,6 +8,9 @@ import {
   SiZod,
   SiVercel,
   SiNetlify,
+  SiAngular,
+  SiMongoose,
+  SiJsonwebtokens,
   SiExpress,
   SiFigma,
   SiFramer,
@@ -59,4 +62,7 @@ export const tech: Record<TechId, Tech> = {
   zod: { name: 'Zod', icon: SiZod },
   vercel: { name: 'Vercel', icon: SiVercel },
   netlify: { name: 'Netlify', icon: SiNetlify },
+  angular: { name: 'Angular', icon: SiAngular },
+  mongoose: { name: 'Mongoose', icon: SiMongoose },
+  jwt: { name: 'JWT', icon: SiJsonwebtokens },
 };

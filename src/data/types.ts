@@ -28,7 +28,10 @@ export type TechId =
   | 'prisma'
   | 'zod'
   | 'vercel'
-  | 'netlify';
+  | 'netlify'
+  | 'angular'
+  | 'mongoose'
+  | 'jwt';
 
 export interface Tech {
   name: string;
@@ -55,6 +58,7 @@ export interface Project {
   title: string;
   summary: string;
   description: string[];
+  /** Base paths of responsive images (no size suffix / extension), first = card thumbnail. */
   images: string[];
   stack: TechId[];
   liveUrl?: string;

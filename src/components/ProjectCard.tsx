@@ -3,6 +3,8 @@ import type { PointerEvent } from 'react';
 import { FiArrowUpRight, FiGithub } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import type { Project } from '../data/types';
+import { loadProjectDetail } from '../pages/lazyPages';
+import { imgSrc, imgSrcSet } from '../utils/images';
 import { revealItem } from './Reveal';
 import TechChip from './TechChip';
 
@@ -39,11 +41,24 @@ export default function ProjectCard({ project }: { project: Project }) {
       style={{ rotateX, rotateY, transformPerspective: 1000 }}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
+      // Fetch the detail page code before the click so navigation feels instant
+      onPointerEnter={loadProjectDetail}
+      onFocus={loadProjectDetail}
+      onTouchStart={loadProjectDetail}
       whileHover={{ y: -6 }}
       transition={{ type: 'spring', ...SPRING }}
     >
       <Link to={`/projects/${slug}`} className="project-card__media" aria-label={`${title} — details`}>
-        <img src={images[0]} alt="" loading="lazy" decoding="async" />
+        <img
+          src={imgSrc(images[0])}
+          srcSet={imgSrcSet(images[0])}
+          sizes="(min-width: 1200px) 380px, (min-width: 768px) 50vw, 100vw"
+          width={1600}
+          height={1000}
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
         <span className="project-card__year">{year}</span>
       </Link>
 

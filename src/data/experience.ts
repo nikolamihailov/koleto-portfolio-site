@@ -7,7 +7,7 @@ export const experience: ExperienceEntry[] = [
   {
     id: 'wiser',
     company: 'Wiser Technology',
-    logo: '/images/companies/wiser-technology.png',
+    logo: '/images/companies/wiser-technology.webp',
     location: 'Remote',
     roles: [
       {
@@ -41,7 +41,7 @@ export const experience: ExperienceEntry[] = [
   {
     id: 'timag',
     company: 'Timag',
-    logo: '/images/companies/timag.png',
+    logo: '/images/companies/timag.webp',
     logoFit: 'contain',
     roles: [
       {
