@@ -27,12 +27,65 @@ function useDotTexture() {
   }, []);
 }
 
+/**
+ * Tracks the real pointer relative to the canvas, in normalised device coordinates.
+ *
+ * We compute this ourselves from the canvas' on-screen rect instead of using R3F's
+ * `pointer`: with the canvas offset to the right of the hero (left: 40%) and events
+ * sourced from <body>, R3F's value was shifted by the canvas offset, so hovering the
+ * text pushed the sphere and hovering the sphere did nothing. It also defaults to the
+ * canvas centre and keeps its last value, which dented the sphere with no cursor.
+ *
+ * `active` is true for a mouse/pen inside the window, or a finger while touching.
+ */
+function usePointer(canvas: HTMLCanvasElement) {
+  const state = useRef({ active: false, ndc: new THREE.Vector2() });
+  useEffect(() => {
+    const track = (e: PointerEvent) => {
+      const r = canvas.getBoundingClientRect();
+      state.current.ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    };
+    const onMove = (e: PointerEvent) => {
+      track(e);
+      // Touch only counts while the finger is down
+      state.current.active = e.pointerType !== 'touch' || e.pressure > 0 || e.buttons > 0;
+    };
+    const onDown = (e: PointerEvent) => {
+      track(e);
+      state.current.active = true;
+    };
+    const onUp = (e: PointerEvent) => {
+      if (e.pointerType === 'touch') state.current.active = false;
+    };
+    const onLeave = () => (state.current.active = false);
+    window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('pointerdown', onDown, { passive: true });
+    window.addEventListener('pointerup', onUp, { passive: true });
+    window.addEventListener('pointercancel', onLeave);
+    window.addEventListener('blur', onLeave);
+    document.documentElement.addEventListener('pointerleave', onLeave);
+    return () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerdown', onDown);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onLeave);
+      window.removeEventListener('blur', onLeave);
+      document.documentElement.removeEventListener('pointerleave', onLeave);
+    };
+  }, [canvas]);
+  return state;
+}
+
 function ParticleSphere({ count, color, additive }: { count: number; color: string; additive: boolean }) {
   const pointsRef = useRef<THREE.Points>(null);
   const texture = useDotTexture();
-  const { viewport, pointer } = useThree();
-  const mouseWorld = useMemo(() => new THREE.Vector3(), []);
+  const { camera, gl } = useThree();
   const mouseLocal = useMemo(() => new THREE.Vector3(), []);
+  const raycaster = useMemo(() => new THREE.Raycaster(), []);
+  // Slightly larger than the sphere so hovering just off the edge still ripples it
+  const hitSphere = useMemo(() => new THREE.Sphere(new THREE.Vector3(), RADIUS * 1.08), []);
+  const pointer = usePointer(gl.domElement);
+  const strength = useRef(0);
 
   // Fibonacci sphere = evenly distributed points. Start scattered so they "assemble" on load.
   const { base, positions } = useMemo(() => {
@@ -61,10 +114,19 @@ function ParticleSphere({ count, color, additive }: { count: number; color: stri
     pts.rotation.y += delta * 0.09;
     pts.rotation.x = Math.sin(t * 0.2) * 0.15;
 
-    // Pointer → world point in front of the sphere → sphere-local space
-    mouseWorld.set((pointer.x * viewport.width) / 2, (pointer.y * viewport.height) / 2, RADIUS * 0.6);
-    mouseLocal.copy(mouseWorld);
-    pts.worldToLocal(mouseLocal);
+    // Cast a ray from the camera through the cursor onto the sphere's surface, only while
+    // a real pointer is present (see usePointer).
+    let target = 0;
+    if (pointer.current.active) {
+      raycaster.setFromCamera(pointer.current.ndc, camera);
+      if (raycaster.ray.intersectSphere(hitSphere, mouseLocal)) {
+        pts.worldToLocal(mouseLocal);
+        target = 1;
+      }
+    }
+    // Ease the effect in/out so the dent never pops on or off
+    strength.current += (target - strength.current) * Math.min(1, delta * 6);
+    const push = PUSH * strength.current;
 
     const attr = pts.geometry.attributes.position as THREE.BufferAttribute;
     const arr = attr.array as Float32Array;
@@ -85,8 +147,8 @@ function ParticleSphere({ count, color, additive }: { count: number; color: stri
       const dy = ty - mouseLocal.y;
       const dz = tz - mouseLocal.z;
       const d = Math.sqrt(dx * dx + dy * dy + dz * dz);
-      if (d < MOUSE_RADIUS) {
-        const f = (1 - d / MOUSE_RADIUS) ** 2 * PUSH;
+      if (push > 0.001 && d < MOUSE_RADIUS && d > 0) {
+        const f = (1 - d / MOUSE_RADIUS) ** 2 * push;
         tx += (dx / d) * f;
         ty += (dy / d) * f;
         tz += (dz / d) * f;
