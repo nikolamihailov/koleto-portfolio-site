@@ -92,7 +92,7 @@ export const projects: Project[] = [
     stack: ['react', 'reactrouter', 'framer', 'node', 'express', 'mongodb', 'mongoose', 'jwt'],
     liveUrl: 'https://kolplace.netlify.app/',
     repoUrl: 'https://github.com/nikolamihailov/React-Projects/tree/main/kolplace%20-%20Final%20React%20Project%20SoftUni',
-    year: 2023,
+    year: 2024,
     role: 'Full-stack developer',
   },
   {
@@ -107,7 +107,7 @@ export const projects: Project[] = [
     stack: ['react', 'typescript', 'threejs', 'vite'],
     liveUrl: 'https://planets-sl.netlify.app/',
     repoUrl: 'https://github.com/nikolamihailov/React-Projects/tree/main/solar-system-planets',
-    year: 2023,
+    year: 2024,
     role: 'Solo project',
   },
 ];
