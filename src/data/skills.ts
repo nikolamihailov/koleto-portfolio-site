@@ -6,4 +6,5 @@ export const skills: SkillGroup[] = [
   { title: 'Creative', items: ['threejs', 'framer', 'figma'] },
   { title: 'Tooling', items: ['git', 'docker', 'vite', 'jest'] },
   { title: 'AI', items: ['claude', 'cursor', 'chatgpt'] },
+  { title: 'Deployment', items: ['netlify', 'vercel', 'render'] },
 ];

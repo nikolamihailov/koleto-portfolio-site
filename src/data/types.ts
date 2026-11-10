@@ -36,7 +36,8 @@ export type TechId =
   | 'nestjs'
   | 'claude'
   | 'cursor'
-  | 'chatgpt';
+  | 'chatgpt'
+  | 'render';
 
 export interface Tech {
   name: string;
