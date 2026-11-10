@@ -137,10 +137,25 @@
       @keyframes boot-bar {
         to { transform: scaleX(1); }
       }
+      @keyframes boot-letter-fade {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      /*
+       * Reduced motion: keep the letter-by-letter fade and the soft fade-out (opacity is
+       * fine for motion-sensitive users), but drop the slide, blur and zoom.
+       * The !important flags win over the site-wide reduced-motion rule in base/_base.scss,
+       * which otherwise shortens every animation/transition to ~0 once the CSS loads.
+       */
       @media (prefers-reduced-motion: reduce) {
-        .boot__word span { animation-duration: 0.3s; animation-delay: 0s !important; }
-        .boot__bar { animation: none; transform: scaleX(1); }
-        .boot, .boot__word { transition-duration: 0.3s; }
+        .boot__word span {
+          animation-name: boot-letter-fade !important;
+          animation-duration: 0.8s !important;
+        }
+        .boot__bar { animation-duration: 1.6s !important; }
+        .boot { transition-duration: 0.7s !important; }
+        .boot__word { transition-duration: 0.6s !important; }
+        .boot.is-done .boot__word { transform: none; filter: none; }
       }
     </style>
   </head>
