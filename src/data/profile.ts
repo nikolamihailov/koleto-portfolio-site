@@ -11,7 +11,7 @@ export const profile: Profile = {
   tagline: 'I build fast, accessible and beautifully animated web experiences.',
   bio: [
     'I am a developer who enjoys turning complex problems into clean, intuitive interfaces. I care about performance, accessibility and the small details that make a product feel polished.',
-    'When I am not coding, I am exploring 3D on the web, contributing to open source or learning something new.',
+    'When I am not coding, you will usually find me training, hiking in the mountains or flying my drone to capture views from above.',
   ],
   location: 'Sofia, Bulgaria',
   email: 'hello@example.com',
