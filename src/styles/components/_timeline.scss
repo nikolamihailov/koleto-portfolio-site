@@ -7,9 +7,11 @@
   --line-x: 1.5rem;
   --node: 3rem;
   --gap: 2.25rem; // horizontal space between the line and a card
+  --cap-h: 2.25rem; // height of the "Now" / "Where it all started" rows
+  --pad: 0.5rem;
 
   position: relative;
-  padding-block: 0.5rem;
+  padding-block: var(--pad);
   // Cards slide in from the side; don't let their start offset widen the page
   overflow-x: hidden;
   overflow-x: clip;
@@ -22,8 +24,9 @@
 
   &__track {
     position: absolute;
-    top: 0;
-    bottom: 0;
+    // Start and end at the centre of the top/bottom caps, never past them
+    top: calc(var(--pad) + var(--cap-h) / 2);
+    bottom: calc(var(--pad) + var(--cap-h) / 2);
     left: var(--line-x);
     width: 2px;
     margin-left: -1px;
@@ -42,11 +45,18 @@
 
   &__cap {
     position: relative;
+    z-index: 1;
     display: flex;
+    align-items: center;
+    height: var(--cap-h);
 
-    > * {
-      margin-left: var(--line-x);
-      transform: translateX(-50%);
+    // Mobile: the line sits near the left edge, so align caps to the edge
+    // (the line ends inside them) instead of centring and getting clipped.
+    @include respond-to('lg') {
+      > * {
+        margin-left: var(--line-x);
+        transform: translateX(-50%);
+      }
     }
   }
 
