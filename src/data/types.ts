@@ -24,7 +24,11 @@ export type TechId =
   | 'css'
   | 'java'
   | 'php'
-  | 'wordpress';
+  | 'wordpress'
+  | 'prisma'
+  | 'zod'
+  | 'vercel'
+  | 'netlify';
 
 export interface Tech {
   name: string;

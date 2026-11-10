@@ -17,8 +17,8 @@ export const profile: Profile = {
   email: 'hello@example.com',
   cvUrl: '#',
   socials: [
-    { label: 'GitHub', url: 'https://github.com/', icon: FiGithub },
-    { label: 'LinkedIn', url: 'https://www.linkedin.com/', icon: FiLinkedin },
+    { label: 'GitHub', url: 'https://github.com/nikolamihailov', icon: FiGithub },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/nikola-mihaylov/', icon: FiLinkedin },
     { label: 'Email', url: 'mailto:hello@example.com', icon: FiMail },
   ],
 };

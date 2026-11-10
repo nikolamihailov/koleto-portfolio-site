@@ -64,6 +64,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      // Screenshots: keep the top (header/hero) visible when cropping
+      object-position: top;
       transition: transform 900ms $ease-out;
     }
   }
