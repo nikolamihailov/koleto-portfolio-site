@@ -1,0 +1,116 @@
+@use '../abstracts' as *;
+
+.gallery {
+  display: grid;
+  gap: 1rem;
+
+  &__stage {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: $radius-lg;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    box-shadow: var(--shadow);
+  }
+
+  &__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &__nav {
+    @include flex-center;
+    @include glass;
+    position: absolute;
+    top: 50%;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    color: var(--text);
+    transform: translateY(-50%);
+    transition:
+      color $duration-fast,
+      border-color $duration-fast,
+      transform $duration-base $ease-out;
+
+    &--prev {
+      left: 0.75rem;
+    }
+
+    &--next {
+      right: 0.75rem;
+    }
+
+    @include hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    @include respond-below('sm') {
+      width: 2.25rem;
+      height: 2.25rem;
+      font-size: 1.1rem;
+    }
+  }
+
+  &__counter {
+    @include glass;
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: $radius-pill;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  &__thumbs {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    scroll-snap-type: x mandatory;
+  }
+
+  &__thumb {
+    display: block;
+    width: clamp(5rem, 18vw, 8rem);
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: $radius-md;
+    border: 2px solid transparent;
+    opacity: 0.55;
+    scroll-snap-align: start;
+    transition:
+      opacity $duration-base $ease-out,
+      border-color $duration-base $ease-out;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &.is-active {
+      opacity: 1;
+      border-color: var(--accent);
+    }
+
+    @include hover {
+      opacity: 1;
+    }
+  }
+}

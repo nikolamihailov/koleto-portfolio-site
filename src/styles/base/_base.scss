@@ -1,0 +1,66 @@
+@use '../abstracts' as *;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: $nav-height;
+
+  @include reduced-motion {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--bg);
+  overflow-x: hidden;
+  overflow-x: clip;
+  transition:
+    background-color $duration-slow $ease-out,
+    color $duration-slow $ease-out;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+a,
+button {
+  @include focus-ring;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Scrollbar
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: $radius-pill;
+  border: 3px solid var(--bg);
+}
+
+@include reduced-motion {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

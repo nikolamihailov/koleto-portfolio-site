@@ -1,0 +1,302 @@
+@use '../abstracts' as *;
+
+// Alternating career timeline.
+// Mobile: line on the left, cards on the right.
+// Desktop (lg+): line centred, cards alternate left/right.
+.timeline {
+  --line-x: 1.5rem;
+  --node: 3rem;
+  --gap: 2.25rem; // horizontal space between the line and a card
+
+  position: relative;
+  padding-block: 0.5rem;
+  // Cards slide in from the side; don't let their start offset widen the page
+  overflow-x: hidden;
+  overflow-x: clip;
+
+  @include respond-to('lg') {
+    --line-x: 50%;
+    --node: 3.5rem;
+    --gap: 3rem;
+  }
+
+  &__track {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--line-x);
+    width: 2px;
+    margin-left: -1px;
+    overflow: hidden;
+    border-radius: $radius-pill;
+    background: var(--border);
+  }
+
+  &__fill {
+    position: absolute;
+    inset: 0;
+    transform-origin: top;
+    background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+
+  &__cap {
+    position: relative;
+    display: flex;
+
+    > * {
+      margin-left: var(--line-x);
+      transform: translateX(-50%);
+    }
+  }
+
+  &__start {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: $radius-pill;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+
+    svg {
+      color: var(--accent);
+    }
+  }
+
+  &__list {
+    display: grid;
+    gap: fluid(2rem, 3.5rem);
+    padding-block: 2.5rem;
+  }
+
+  &__item {
+    position: relative;
+    padding-left: calc(var(--line-x) + var(--gap));
+
+    @include respond-to('lg') {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: calc(var(--gap) * 2);
+      padding-left: 0;
+
+      &--left .xp-card {
+        grid-column: 1;
+      }
+
+      &--right .xp-card {
+        grid-column: 2;
+      }
+    }
+  }
+
+  &__node {
+    position: absolute;
+    top: 1.25rem;
+    left: var(--line-x);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--node);
+    height: var(--node);
+    // margin instead of transform: framer-motion owns the transform property
+    margin-left: calc(var(--node) / -2);
+    overflow: hidden;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    box-shadow:
+      0 0 0 6px var(--bg),
+      0 0 22px var(--accent-glow);
+  }
+
+  &__logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__logo-initials {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--accent);
+  }
+}
+
+// ---------- Company card ----------
+.xp-card {
+  position: relative;
+  padding: fluid(1.25rem, 1.75rem);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: $radius-lg;
+  box-shadow: var(--shadow);
+  transition:
+    border-color $duration-base $ease-out,
+    box-shadow $duration-base $ease-out;
+
+  // Connector from the card to its node
+  &::before {
+    content: '';
+    position: absolute;
+    top: calc(1.25rem + var(--node) / 2 - 1px);
+    left: calc(var(--gap) * -1 + var(--node) / 2);
+    width: calc(var(--gap) - var(--node) / 2);
+    height: 2px;
+    background: var(--border-strong);
+  }
+
+  @include respond-to('lg') {
+    &--left::before {
+      left: auto;
+      right: calc(var(--gap) * -1 + var(--node) / 2);
+    }
+  }
+
+  @include hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-hover);
+  }
+
+  &__header {
+    margin-bottom: 1.25rem;
+  }
+
+  &__company {
+    font-size: fluid(1.2rem, 1.45rem);
+
+    a {
+      transition: color $duration-fast;
+
+      @include hover {
+        color: var(--accent);
+      }
+    }
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.3rem;
+    font-size: 0.85rem;
+    color: var(--text-subtle);
+  }
+
+  &__roles {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  // LinkedIn-style connected roles within one company (promotions)
+  &__roles--multi .xp-role {
+    padding-left: 1.6rem;
+
+    .xp-role__dot {
+      display: block;
+    }
+
+    &:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      top: 1.15rem;
+      bottom: -1.5rem;
+      left: 5px;
+      width: 2px;
+      background: var(--border-strong);
+    }
+  }
+}
+
+.xp-role {
+  position: relative;
+
+  &__dot {
+    display: none;
+    position: absolute;
+    top: 0.45rem;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--accent);
+  }
+
+  &:first-child &__dot {
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+
+  &__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+  }
+
+  &__title {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  &__badges {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  &__dates {
+    margin-top: 0.2rem;
+    font-size: 0.85rem;
+    color: var(--text-subtle);
+  }
+
+  &__duration {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  &__desc {
+    margin-top: 0.65rem;
+    font-size: 0.95rem;
+  }
+
+  &__highlights {
+    display: grid;
+    gap: 0.35rem;
+    margin-top: 0.65rem;
+
+    li {
+      position: relative;
+      padding-left: 1.1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0.6em;
+        left: 0;
+        width: 6px;
+        height: 6px;
+        border-radius: 2px;
+        background: var(--accent);
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  &__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.85rem;
+  }
+}

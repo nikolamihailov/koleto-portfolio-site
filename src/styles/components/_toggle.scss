@@ -1,0 +1,56 @@
+@use '../abstracts' as *;
+
+.theme-toggle {
+  @include flex-center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  font-size: 1.1rem;
+  overflow: hidden;
+  transition:
+    border-color $duration-base $ease-out,
+    color $duration-base $ease-out,
+    box-shadow $duration-base $ease-out;
+
+  @include hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+
+  &__icon {
+    display: inline-flex;
+  }
+}
+
+.logo {
+  display: inline-flex;
+  border-radius: 50%;
+
+  &__mark {
+    @include flex-center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    transition:
+      box-shadow $duration-base $ease-out,
+      background-color $duration-base $ease-out,
+      color $duration-base $ease-out;
+  }
+
+  @include hover {
+    .logo__mark {
+      background: var(--accent);
+      color: var(--accent-contrast);
+      box-shadow: 0 0 24px var(--accent-glow);
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@use 'sass:math';
+
+@function to-px($value) {
+  @if math.unit($value) == 'rem' {
+    @return math.div($value, 1rem) * 16px;
+  }
+  @return $value;
+}
+
+@function round-to($value, $places: 4) {
+  $m: math.pow(10, $places);
+  @return math.div(math.round($value * $m), $m);
+}
+
+/// Fluid value that scales linearly between $min and $max across $min-vw → $max-vw.
+/// fluid(1rem, 2rem) → clamp(1rem, 0.6667rem + 1.4815vw, 2rem)
+@function fluid($min, $max, $min-vw: 360px, $max-vw: 1440px) {
+  $min-px: to-px($min);
+  $max-px: to-px($max);
+  $slope: math.div($max-px - $min-px, $max-vw - $min-vw);
+  $intercept: math.div($min-px - $slope * $min-vw, 16px);
+  @return clamp(#{$min}, #{round-to($intercept)}rem + #{round-to($slope * 100)}vw, #{$max});
+}

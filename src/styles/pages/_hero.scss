@@ -1,0 +1,142 @@
+@use '../abstracts' as *;
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-top: $nav-height;
+  overflow: hidden;
+
+  &__content {
+    @include container;
+    position: relative;
+    z-index: 1;
+    // Keep text readable over the 3D scene on small screens
+    pointer-events: none;
+
+    > * {
+      max-width: 40rem;
+      pointer-events: auto;
+    }
+  }
+
+  &__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: $radius-pill;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    @include glass;
+  }
+
+  &__pulse {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s $ease-out infinite;
+    }
+  }
+
+  &__title {
+    margin-bottom: 1.5rem;
+  }
+
+  &__name {
+    background: linear-gradient(120deg, var(--accent), var(--accent-strong));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--accent);
+  }
+
+  &__tagline {
+    max-width: 34rem;
+    margin-bottom: 2.25rem;
+    font-size: fluid(1.05rem, 1.25rem);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-bottom: 2.25rem;
+  }
+
+  &__socials {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  &__scroll {
+    @include flex-center;
+    position: absolute;
+    left: 50%;
+    bottom: 1.75rem;
+    z-index: 1;
+    width: 2.6rem;
+    height: 2.6rem;
+    margin-left: -1.3rem;
+    border-radius: 50%;
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
+
+    svg {
+      animation: bob 2.2s $ease-in-out infinite;
+    }
+
+    @include respond-below('md') {
+      display: none;
+    }
+  }
+}
+
+.hero-scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0.45;
+
+  @include respond-to('lg') {
+    left: 40%;
+    opacity: 1;
+  }
+
+  &--fallback {
+    background: radial-gradient(circle at 60% 50%, var(--accent-soft), transparent 60%);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}

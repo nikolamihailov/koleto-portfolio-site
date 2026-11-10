@@ -1,0 +1,22 @@
+// Light — crisp off-white with deep teal-cyan for strong contrast (WCAG AA+)
+[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f4fafb;
+  --bg-elevated: #eaf4f6;
+  --surface: #ffffff;
+  --surface-hover: #f0f9fa;
+  --surface-glass: rgba(255, 255, 255, 0.78);
+  --border: rgba(0, 95, 110, 0.14);
+  --border-strong: rgba(0, 95, 110, 0.35);
+  --text: #031216;
+  --text-muted: #3d5a61;
+  --text-subtle: #5f7a81;
+  --accent: #006d7c;
+  --accent-strong: #00525d;
+  --accent-contrast: #ffffff;
+  --accent-soft: rgba(0, 109, 124, 0.1);
+  --accent-glow: rgba(0, 109, 124, 0.25);
+  --particle: 0, 109, 124;
+  --shadow: 0 10px 30px -14px rgba(3, 18, 22, 0.25);
+  --shadow-hover: 0 22px 50px -18px rgba(0, 109, 124, 0.35);
+}

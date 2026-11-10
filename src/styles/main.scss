@@ -1,0 +1,34 @@
+// 7-1 architecture entry point.
+// abstracts: tokens, functions, mixins (emit no CSS)
+// vendors:   third-party overrides
+// themes:    light / dark CSS custom properties
+// base:      reset, typography, globals
+// layout:    navbar, sections, grids, footer
+// components: reusable UI pieces
+// pages:     page/section-specific styles
+
+@use 'vendors';
+
+@use 'themes/dark';
+@use 'themes/light';
+
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/base';
+
+@use 'layout/navbar';
+@use 'layout/section';
+@use 'layout/grid';
+@use 'layout/footer';
+
+@use 'components/button';
+@use 'components/card';
+@use 'components/chip';
+@use 'components/loader';
+@use 'components/toggle';
+@use 'components/gallery';
+@use 'components/timeline';
+
+@use 'pages/hero';
+@use 'pages/about';
+@use 'pages/project';

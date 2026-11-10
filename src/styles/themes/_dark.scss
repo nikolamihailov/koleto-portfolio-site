@@ -1,0 +1,23 @@
+// Dark (default) — deep near-black with high-contrast electric cyan
+:root,
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #04080a;
+  --bg-elevated: #081014;
+  --surface: #0b161b;
+  --surface-hover: #0f1f26;
+  --surface-glass: rgba(8, 16, 20, 0.72);
+  --border: rgba(0, 229, 255, 0.12);
+  --border-strong: rgba(0, 229, 255, 0.32);
+  --text: #eafcff;
+  --text-muted: #9bb4ba;
+  --text-subtle: #6a838a;
+  --accent: #00e5ff;
+  --accent-strong: #5ff3ff;
+  --accent-contrast: #001a1f;
+  --accent-soft: rgba(0, 229, 255, 0.12);
+  --accent-glow: rgba(0, 229, 255, 0.35);
+  --particle: 0, 229, 255;
+  --shadow: 0 10px 40px -12px rgba(0, 0, 0, 0.8);
+  --shadow-hover: 0 20px 60px -15px rgba(0, 229, 255, 0.28);
+}

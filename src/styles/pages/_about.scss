@@ -1,0 +1,42 @@
+@use '../abstracts' as *;
+
+.about {
+  &__grid {
+    display: grid;
+    gap: 2.5rem;
+
+    @include respond-to('lg') {
+      grid-template-columns: 1.4fr 1fr;
+      align-items: start;
+      gap: 4rem;
+    }
+  }
+
+  &__text {
+    display: grid;
+    gap: 1.1rem;
+    justify-items: start;
+
+    p {
+      font-size: fluid(1rem, 1.12rem);
+    }
+  }
+
+  &__location {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--text) !important;
+    font-weight: 500;
+
+    svg {
+      color: var(--accent);
+    }
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+}

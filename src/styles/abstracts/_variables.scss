@@ -1,0 +1,21 @@
+// Static design tokens (theme-independent)
+$font-display: 'Space Grotesk', system-ui, sans-serif;
+$font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+$radius-sm: 0.5rem;
+$radius-md: 0.875rem;
+$radius-lg: 1.25rem;
+$radius-pill: 999px;
+
+$container-max: 1200px;
+$nav-height: 4.5rem;
+
+$ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+$ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+$duration-fast: 180ms;
+$duration-base: 320ms;
+$duration-slow: 600ms;
+
+$z-particles: -1;
+$z-nav: 50;
+$z-loader: 100;

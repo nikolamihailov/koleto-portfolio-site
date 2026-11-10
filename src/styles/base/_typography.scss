@@ -1,0 +1,37 @@
+@use '../abstracts' as *;
+
+body {
+  font-family: $font-body;
+  font-size: fluid(0.95rem, 1.05rem);
+  color: var(--text);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: $font-display;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+h1 {
+  font-size: fluid(2.4rem, 4.5rem);
+}
+
+h2 {
+  font-size: fluid(1.9rem, 3rem);
+}
+
+h3 {
+  font-size: fluid(1.15rem, 1.4rem);
+}
+
+p {
+  color: var(--text-muted);
+}
+
+.text-accent {
+  color: var(--accent);
+}

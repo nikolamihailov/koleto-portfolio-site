@@ -1,0 +1,114 @@
+@use '../abstracts' as *;
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: $z-nav;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color $duration-base $ease-out,
+    border-color $duration-base $ease-out,
+    -webkit-backdrop-filter $duration-base $ease-out,
+    backdrop-filter $duration-base $ease-out;
+
+  &--scrolled {
+    @include glass;
+    border-width: 0 0 1px;
+  }
+
+  &__inner {
+    @include container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $nav-height;
+  }
+
+  &__links {
+    display: none;
+    gap: 0.25rem;
+
+    @include respond-to('md') {
+      display: flex;
+    }
+  }
+
+  &__link {
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color $duration-fast;
+
+    @include hover {
+      color: var(--text);
+    }
+
+    &.is-active {
+      color: var(--accent);
+    }
+  }
+
+  &__underline {
+    position: absolute;
+    left: 0.9rem;
+    right: 0.9rem;
+    bottom: 0.2rem;
+    height: 2px;
+    border-radius: $radius-pill;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__burger {
+    @include flex-center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    font-size: 1.35rem;
+    color: var(--text);
+
+    @include respond-to('md') {
+      display: none;
+    }
+  }
+
+  &__mobile {
+    @include glass;
+    position: fixed;
+    top: $nav-height;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    height: calc(100vh - #{$nav-height});
+    height: calc(100dvh - #{$nav-height});
+    padding: 1.5rem clamp(1rem, 4vw, 2rem);
+    border-width: 1px 0 0;
+
+    .nav__link {
+      display: block;
+      padding: 1rem 0;
+      font-family: $font-display;
+      font-size: 1.6rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav__underline {
+      display: none;
+    }
+
+    @include respond-to('md') {
+      display: none;
+    }
+  }
+}

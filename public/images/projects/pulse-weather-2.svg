@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000">
+<defs>
+<linearGradient id="g" gradientTransform="rotate(80 .5 .5)"><stop offset="0" stop-color="#1a0b24"/><stop offset="1" stop-color="#ff7ad9"/></linearGradient>
+<pattern id="p" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".06"/></pattern>
+</defs>
+<rect width="1600" height="1000" fill="url(#g)"/>
+<rect width="1600" height="1000" fill="url(#p)"/>
+<circle cx="960" cy="460" r="280" fill="#fff" fill-opacity=".07"/>
+<rect x="160" y="160" width="1280" height="680" rx="28" fill="#000" fill-opacity=".25" stroke="#fff" stroke-opacity=".15"/>
+<text x="800" y="500" text-anchor="middle" font-family="Arial, sans-serif" font-size="88" font-weight="700" fill="#fff">Pulse Weather</text>
+<text x="800" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" fill="#fff" fill-opacity=".7">Screenshot 2</text>
+</svg>
