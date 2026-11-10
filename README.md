@@ -4,27 +4,35 @@
 
 My personal developer portfolio: a fast, fully responsive single-page app with an interactive three.js hero, smooth scroll animations and light/dark themes.
 
-![Hero — dark theme](docs/screenshots/hero-dark.png)
+<!-- Screenshots are the site's own optimized gallery images (generated from images-src/ by `npm run images`) -->
+![Hero — dark theme](public/images/projects/portfolio/01-hero-1600.webp)
 
 ## Features
 
-- **Intro loader:** "KOLETO" fades in letter by letter, then reveals the site.
-- **Interactive 3D hero:** a particle sphere (three.js / React Three Fiber) that assembles on load, breathes and scatters away from the cursor.
+- **Intro loader:** "KOLETO" fades in letter by letter, then reveals the site. It's plain HTML/CSS in `index.html`, so it paints before any JavaScript loads.
+- **Interactive 3D hero:** a particle sphere (three.js / React Three Fiber) that assembles on load, breathes, and parts exactly under the cursor. It loads on idle after the page appears.
 - **Ambient particle background:** a lightweight 2D canvas of drifting, connected particles across every page.
 - **Light & dark themes:** high-contrast cyan palette, saved preference, no flash of the wrong theme, smooth cross-fade (View Transitions API).
 - **Projects:** cards with tech chips, icons, **Live demo** and **View code** buttons, a 3D tilt and a cursor spotlight. Each project has its own page (`/projects/:slug`) with a swipeable gallery.
 - **Experience timeline:** an alternating left/right timeline with promotions grouped under one company (LinkedIn-style). The line fills as you scroll.
 - **Scroll reveals & micro-interactions** with Framer Motion. Respects `prefers-reduced-motion`.
-- **Responsive & cross-browser:** mobile-first, fluid typography with `clamp()`, Autoprefixer.
+- **Skills:** grouped cards with official brand-coloured icons (Frontend, Backend, Creative, Tooling, AI, Deployment).
+- **Responsive & cross-browser:** mobile-first, fluid typography with `clamp()`, Autoprefixer; tested in Chrome and Firefox.
+- **Fast:** self-hosted fonts, responsive WebP images, code-split routes, three.js loaded on idle.
+- **SEO:** `robots.txt`, a sitemap generated at build time, canonical URL and Open Graph image.
 - **No backend:** all content lives in typed files in `src/data/`.
 
-| Light theme | Projects |
+| About | Projects |
 | --- | --- |
-| ![Light theme](docs/screenshots/hero-light.png) | ![Projects](docs/screenshots/projects.png) |
+| ![About](public/images/projects/portfolio/02-about-960.webp) | ![Projects](public/images/projects/portfolio/03-projects-960.webp) |
 
-| Experience (desktop) | Experience (mobile) |
+| Skills | Experience |
 | --- | --- |
-| ![Experience timeline](docs/screenshots/experience.png) | <img src="docs/screenshots/mobile-experience.png" alt="Mobile experience timeline" width="260" /> |
+| ![Skills](public/images/projects/portfolio/04-skills-960.webp) | ![Experience timeline](public/images/projects/portfolio/05-experience-960.webp) |
+
+| Project page | Light theme |
+| --- | --- |
+| ![Project page](public/images/projects/portfolio/06-project-page-960.webp) | ![Light theme](public/images/projects/portfolio/07-light-960.webp) |
 
 ## Tech stack
 
