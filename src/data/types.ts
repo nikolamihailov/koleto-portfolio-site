@@ -20,7 +20,11 @@ export type TechId =
   | 'html'
   | 'python'
   | 'framer'
-  | 'jest';
+  | 'jest'
+  | 'css'
+  | 'java'
+  | 'php'
+  | 'wordpress';
 
 export interface Tech {
   name: string;
@@ -77,7 +81,9 @@ export interface ExperienceEntry {
   company: string;
   /** Path to a logo in /public, e.g. `/images/companies/orbit.svg`. Falls back to initials. */
   logo?: string;
+  /** `cover` (default) fills the circle; `contain` fits wide logos on a white background. */
+  logoFit?: 'cover' | 'contain';
   url?: string;
-  location: string;
+  location?: string;
   roles: Role[];
 }

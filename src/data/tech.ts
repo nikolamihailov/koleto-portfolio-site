@@ -1,5 +1,9 @@
 import {
+  SiCss3,
   SiDocker,
+  SiOpenjdk,
+  SiPhp,
+  SiWordpress,
   SiExpress,
   SiFigma,
   SiFramer,
@@ -43,4 +47,8 @@ export const tech: Record<TechId, Tech> = {
   python: { name: 'Python', icon: SiPython },
   framer: { name: 'Framer Motion', icon: SiFramer },
   jest: { name: 'Jest', icon: SiJest },
+  css: { name: 'CSS', icon: SiCss3 },
+  java: { name: 'Java', icon: SiOpenjdk },
+  php: { name: 'PHP', icon: SiPhp },
+  wordpress: { name: 'WordPress', icon: SiWordpress },
 };

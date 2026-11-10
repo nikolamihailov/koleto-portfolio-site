@@ -129,6 +129,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    // Wide / transparent logos: fit inside the circle on a white plate
+    &--contain {
+      object-fit: contain;
+      padding: 0.3rem;
+      background: #fff;
+    }
   }
 
   &__logo-initials {
@@ -271,6 +278,7 @@
   &__duration {
     color: var(--accent);
     font-weight: 500;
+    white-space: nowrap;
   }
 
   &__desc {

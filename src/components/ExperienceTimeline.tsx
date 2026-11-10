@@ -8,7 +8,15 @@ import TechChip from './TechChip';
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 function CompanyLogo({ entry }: { entry: ExperienceEntry }) {
-  if (entry.logo) return <img src={entry.logo} alt="" className="timeline__logo-img" />;
+  if (entry.logo)
+    return (
+      <img
+        src={entry.logo}
+        alt={`${entry.company} logo`}
+        className={`timeline__logo-img timeline__logo-img--${entry.logoFit ?? 'cover'}`}
+        loading="lazy"
+      />
+    );
   const initials = entry.company
     .split(/\s+/)
     .map((w) => w[0])
@@ -42,10 +50,21 @@ function CompanyCard({ entry, side }: { entry: ExperienceEntry; side: 'left' | '
               company
             )}
           </h3>
-          <p className="xp-card__meta">
-            <FiMapPin aria-hidden="true" /> {location}
-            {multi && <span className="xp-card__total"> · {formatDuration(first.start, last.end)}</span>}
-          </p>
+          {(location || multi) && (
+            <p className="xp-card__meta">
+              {location && (
+                <>
+                  <FiMapPin aria-hidden="true" /> {location}
+                </>
+              )}
+              {multi && (
+                <span className="xp-card__total">
+                  {location && ' · '}
+                  {formatDuration(first.start, last.end)}
+                </span>
+              )}
+            </p>
+          )}
         </div>
       </header>
 

@@ -5,10 +5,20 @@ import { experience } from '../data/experience';
 import { profile } from '../data/profile';
 import { projects } from '../data/projects';
 
-const firstYear = Math.min(...experience.flatMap((e) => e.roles.map((r) => Number(r.start.slice(0, 4)))));
+// Sum the time actually spent at each company (first role start → latest role end).
+const toMonths = (ym?: string) => {
+  const d = ym ? new Date(`${ym}-01`) : new Date();
+  return d.getFullYear() * 12 + d.getMonth();
+};
+const totalMonths = experience.reduce((sum, e) => {
+  const first = e.roles[e.roles.length - 1];
+  const last = e.roles[0];
+  return sum + (toMonths(last.end) - toMonths(first.start) + 1);
+}, 0);
+const years = Math.floor(totalMonths / 12);
 
 const stats = [
-  { value: `${new Date().getFullYear() - firstYear}+`, label: 'Years of experience' },
+  { value: years >= 1 ? `${years}+` : `${totalMonths}`, label: years >= 1 ? 'Years of experience' : 'Months of experience' },
   { value: `${projects.length}+`, label: 'Projects shipped' },
   { value: `${experience.length}`, label: 'Companies' },
 ];
