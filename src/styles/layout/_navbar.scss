@@ -81,34 +81,86 @@
     }
   }
 
+  // Menu open: solid bar, and no backdrop-filter so the fixed panel below
+  // is positioned against the viewport (a filtered ancestor would capture it).
+  &--open {
+    background: var(--bg);
+    border-bottom-color: var(--border);
+  }
+
+  // ---------- Mobile menu panel ----------
   &__mobile {
-    @include glass;
     position: fixed;
     top: $nav-height;
     left: 0;
     right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
-    height: calc(100vh - #{$nav-height});
-    height: calc(100dvh - #{$nav-height});
-    padding: 1.5rem clamp(1rem, 4vw, 2rem);
-    border-width: 1px 0 0;
-
-    .nav__link {
-      display: block;
-      padding: 1rem 0;
-      font-family: $font-display;
-      font-size: 1.6rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav__underline {
-      display: none;
-    }
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.5rem clamp(1rem, 4vw, 2rem) max(1.75rem, env(safe-area-inset-bottom));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    // Fully opaque, with a soft accent glow so it doesn't feel flat
+    background:
+      radial-gradient(120% 60% at 100% 0%, var(--accent-soft), transparent 60%),
+      var(--bg);
 
     @include respond-to('md') {
       display: none;
     }
+  }
+
+  &__mobile-links {
+    display: flex;
+    flex-direction: column;
+
+    li + li {
+      border-top: 1px solid var(--border);
+    }
+  }
+
+  &__mobile-link {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    font-family: $font-display;
+    font-size: fluid(1.6rem, 2rem);
+    font-weight: 600;
+    color: var(--text);
+    transition:
+      color $duration-fast,
+      padding-left $duration-base $ease-out;
+
+    &.is-active,
+    &:active {
+      color: var(--accent);
+      padding-left: 0.5rem;
+    }
+  }
+
+  &__mobile-index {
+    font-family: $font-body;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+
+  &__mobile-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  &__mobile-socials {
+    display: flex;
+    gap: 0.6rem;
   }
 }
