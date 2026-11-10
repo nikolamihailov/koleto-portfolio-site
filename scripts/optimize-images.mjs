@@ -2,6 +2,7 @@
 //
 //   images-src/projects/<project>/<name>.(png|jpg|jpeg|webp)
 //     → public/images/projects/<project>/<name>-480.webp   (thumbnails, small cards)
+//     → public/images/projects/<project>/<name>-720.webp   (cards on phones, ~1.75–2x DPR)
 //     → public/images/projects/<project>/<name>-960.webp   (cards on retina, mobile gallery)
 //     → public/images/projects/<project>/<name>-1600.webp  (desktop gallery)
 //
@@ -16,7 +17,7 @@ import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 // Keep in sync with IMAGE_WIDTHS in src/utils/images.ts
-const WIDTHS = [480, 960, 1600];
+const WIDTHS = [480, 720, 960, 1600];
 const QUALITY = 80;
 const EXTS = new Set(['.png', '.jpg', '.jpeg', '.webp']);
 

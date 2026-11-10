@@ -118,6 +118,8 @@
   position: absolute;
   inset: 0;
   opacity: 0.45;
+  // It mounts after the hero text (on idle), so ease it in rather than popping
+  animation: hero-scene-in 1.2s $ease-out both;
 
   @include respond-to('lg') {
     left: 40%;
@@ -126,6 +128,12 @@
 
   &--fallback {
     background: radial-gradient(circle at 60% 50%, var(--accent-soft), transparent 60%);
+  }
+}
+
+@keyframes hero-scene-in {
+  from {
+    opacity: 0;
   }
 }
 

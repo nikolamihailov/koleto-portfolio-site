@@ -52,7 +52,8 @@ export default function ProjectCard({ project }: { project: Project }) {
         <img
           src={imgSrc(images[0])}
           srcSet={imgSrcSet(images[0])}
-          sizes="(min-width: 1200px) 380px, (min-width: 768px) 50vw, 100vw"
+          // Matches the grid: 3 columns ≈380px, 2 columns ≈ half minus gaps, 1 column = width minus gutters
+          sizes="(min-width: 1200px) 380px, (min-width: 768px) calc(50vw - 3rem), calc(100vw - 2rem)"
           width={1600}
           height={1000}
           alt=""

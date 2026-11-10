@@ -3,13 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="description" content="Portfolio of Nikola Mihaylov — software developer." />
-    <meta name="theme-color" content="#05080b" />
+    <title>Koleto · Nikola Mihaylov — Full-Stack Developer</title>
+    <meta name="description" content="Portfolio of Nikola Mihaylov, a full-stack developer building fast, accessible and animated web experiences with React, TypeScript and Node.js." />
+    <link rel="canonical" href="https://koleto.eu/" />
+    <meta name="theme-color" content="#04080a" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-    <title>Koleto · Portfolio</title>
+
+    <!-- Social previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://koleto.eu/" />
+    <meta property="og:title" content="Nikola Mihaylov — Full-Stack Developer" />
+    <meta property="og:description" content="Projects, skills and experience of Nikola Mihaylov." />
+    <meta property="og:image" content="https://koleto.eu/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Self-hosted variable fonts (latin subset), preloaded so text never waits on a third party -->
+    <link rel="preload" href="/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+
     <script>
       // Set theme before first paint to avoid a flash of the wrong theme.
       (function () {
@@ -22,8 +33,122 @@
         }
       })();
     </script>
+
+    <style>
+      @font-face {
+        font-family: 'Space Grotesk';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 300 700;
+        src: url('/fonts/space-grotesk-latin-var.woff2') format('woff2-variations');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 100 900;
+        src: url('/fonts/inter-latin-var.woff2') format('woff2-variations');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+
+      /*
+       * Boot loader: plain HTML + CSS so "KOLETO" paints immediately, before any JS
+       * has downloaded. The app fades it out (adds .is-done) and removes it when ready.
+       */
+      .boot {
+        --boot-bg: #04080a;
+        --boot-text: #eafcff;
+        --boot-accent: #00e5ff;
+        --boot-glow: rgba(0, 229, 255, 0.35);
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.75rem;
+        background: var(--boot-bg);
+        transition: opacity 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+      }
+      [data-theme='light'] .boot {
+        --boot-bg: #f4fafb;
+        --boot-text: #031216;
+        --boot-accent: #006d7c;
+        --boot-glow: rgba(0, 109, 124, 0.25);
+      }
+      html,
+      body {
+        background: var(--boot-bg, #04080a);
+        margin: 0;
+      }
+      [data-theme='light'] body {
+        background: #f4fafb;
+      }
+      .boot__word {
+        display: flex;
+        margin: 0;
+        padding-left: 0.3em;
+        font-family: 'Space Grotesk', system-ui, sans-serif;
+        font-size: clamp(3rem, 1.75rem + 5.56vw, 8.5rem);
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        line-height: 1;
+        color: var(--boot-text);
+        text-shadow: 0 0 40px var(--boot-glow);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease,
+          filter 0.6s ease;
+      }
+      .boot__word span {
+        display: inline-block;
+        opacity: 0;
+        animation: boot-letter 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      .boot__word span:nth-child(1) { animation-delay: 0.15s; }
+      .boot__word span:nth-child(2) { animation-delay: 0.24s; }
+      .boot__word span:nth-child(3) { animation-delay: 0.33s; }
+      .boot__word span:nth-child(4) { animation-delay: 0.42s; }
+      .boot__word span:nth-child(5) { animation-delay: 0.51s; }
+      .boot__word span:nth-child(6) { animation-delay: 0.6s; }
+      .boot__bar {
+        width: min(220px, 50vw);
+        height: 2px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, transparent, var(--boot-accent), transparent);
+        transform: scaleX(0);
+        animation: boot-bar 1.6s cubic-bezier(0.65, 0, 0.35, 1) 0.3s forwards;
+      }
+      .boot.is-done {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .boot.is-done .boot__word {
+        opacity: 0;
+        transform: scale(1.08);
+        filter: blur(10px);
+      }
+      @keyframes boot-letter {
+        from { opacity: 0; transform: translateY(24px); filter: blur(12px); }
+        to { opacity: 1; transform: none; filter: none; }
+      }
+      @keyframes boot-bar {
+        to { transform: scaleX(1); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .boot__word span { animation-duration: 0.3s; animation-delay: 0s !important; }
+        .boot__bar { animation: none; transform: scaleX(1); }
+        .boot, .boot__word { transition-duration: 0.3s; }
+      }
+    </style>
   </head>
   <body>
+    <div class="boot" id="boot" role="status" aria-label="Loading">
+      <p class="boot__word" aria-hidden="true"><span>K</span><span>O</span><span>L</span><span>E</span><span>T</span><span>O</span></p>
+      <span class="boot__bar" aria-hidden="true"></span>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

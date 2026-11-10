@@ -1,5 +1,5 @@
 import { motion, type Variants } from 'framer-motion';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { FiArrowDown, FiArrowRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { loadHeroScene } from '../components/loadHeroScene';
@@ -9,17 +9,41 @@ const HeroScene = lazy(loadHeroScene);
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const group: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.12, delayChildren: 0.35 } } };
+// opacity + transform only, so the entrance stays on the compositor
 const item: Variants = {
-  hidden: { opacity: 0, y: 28, filter: 'blur(6px)' },
-  show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.9, ease: EASE } },
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE } },
 };
 
+type IdleWindow = Window & { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number };
+
+/**
+ * Mount the three.js scene only once the browser is idle after the hero text has
+ * rendered, so downloading/parsing ~220 kB of three.js never delays first paint or LCP.
+ */
+function useIdleMount() {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const w = window as IdleWindow;
+    if (w.requestIdleCallback) {
+      const id = w.requestIdleCallback(() => setReady(true), { timeout: 1200 });
+      return () => window.cancelIdleCallback?.(id);
+    }
+    const t = window.setTimeout(() => setReady(true), 300);
+    return () => window.clearTimeout(t);
+  }, []);
+  return ready;
+}
+
 export default function Hero() {
+  const showScene = useIdleMount();
   return (
     <section className="hero" id="home">
-      <Suspense fallback={<div className="hero-scene" aria-hidden="true" />}>
-        <HeroScene />
-      </Suspense>
+      {showScene && (
+        <Suspense fallback={null}>
+          <HeroScene />
+        </Suspense>
+      )}
 
       <motion.div className="hero__content" variants={group} initial="hidden" animate="show">
         <motion.p variants={item} className="hero__eyebrow">

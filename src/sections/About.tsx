@@ -4,6 +4,7 @@ import SectionHeader from '../components/SectionHeader';
 import { experience } from '../data/experience';
 import { profile } from '../data/profile';
 import { projects } from '../data/projects';
+import { imgSrc } from '../utils/images';
 
 // Sum the time actually spent at each company (first role start → latest role end).
 const toMonths = (ym?: string) => {
@@ -33,8 +34,9 @@ export default function About() {
             <Reveal className="about__media">
               <figure className="portrait">
                 <div className="portrait__frame">
+                  {/* The original portrait is 400px, so the 480 variant is the full-res WebP */}
                   <img
-                    src={profile.photo}
+                    src={imgSrc(profile.photo, 480)}
                     alt={`Portrait of ${profile.name}`}
                     width={400}
                     height={400}

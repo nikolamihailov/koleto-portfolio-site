@@ -79,7 +79,7 @@ src/
 | Technology names & icons | `src/data/tech.ts` |
 | Theme colours | `src/styles/themes/_dark.scss`, `_light.scss` |
 
-- **Project images:** put original screenshots in `images-src/projects/<project>/`, then run `npm run images`. That generates responsive WebP files (480/960/1600px) in `public/images/projects/`. In `projects.ts`, reference them by name without the extension, e.g. `tennis('01-home')`. The first image is the card thumbnail.
+- **Project images:** put original screenshots in `images-src/projects/<project>/`, then run `npm run images`. That generates responsive WebP files (480/720/960/1600px) in `public/images/projects/`. In `projects.ts`, reference them by name without the extension, e.g. `tennis('01-home')`. The first image is the card thumbnail.
 - **Company logos** go in `public/images/companies/` (`logo: '/images/companies/acme.png'`). Without a logo, the company's initials are shown.
 - **Promotions:** list several roles under one company (newest first) and they're connected automatically.
 - **New technologies:** add an id to `TechId` in `types.ts`, then an entry in `tech.ts` (icons from `react-icons/si`).

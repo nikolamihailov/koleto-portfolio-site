@@ -48,7 +48,7 @@ export interface Profile {
   shortName: string;
   initials: string;
   role: string;
-  /** Path to a portrait in /public, e.g. `/images/profile.jpg`. */
+  /** Base path of the portrait from the image pipeline (images-src/profile/), e.g. `/images/profile/profile`. */
   photo?: string;
   tagline: string;
   bio: string[];
