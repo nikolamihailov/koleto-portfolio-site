@@ -49,6 +49,11 @@
       border-radius: 50%;
       background: var(--accent);
       animation: pulse 2s $ease-out infinite;
+
+      @include reduced-motion {
+        animation: none;
+        opacity: 0;
+      }
     }
   }
 
@@ -97,6 +102,10 @@
 
     svg {
       animation: bob 2.2s $ease-in-out infinite;
+
+      @include reduced-motion {
+        animation: none;
+      }
     }
 
     @include respond-below('md') {
