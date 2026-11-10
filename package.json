@@ -2,6 +2,8 @@
   "name": "koleto-portfolio",
   "private": true,
   "version": "0.1.0",
+  "license": "UNLICENSED",
+  "author": "Nikola Mihaylov",
   "type": "module",
   "scripts": {
     "dev": "vite",

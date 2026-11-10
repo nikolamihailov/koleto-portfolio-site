@@ -94,4 +94,6 @@ src/
 
 ## License
 
-© Nikola Mihaylov. The code is free to read and learn from. Please don't republish the site, its content or its design as your own.
+**All rights reserved.** © 2026 Nikola Mihaylov.
+
+The source is public for viewing and reference only. Copying, deploying, modifying, redistributing or selling this project, or any part of its code, design or content, is not permitted without written permission. See [LICENSE](LICENSE) for details.

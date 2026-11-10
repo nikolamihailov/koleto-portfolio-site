@@ -1,0 +1,31 @@
+Copyright (c) 2026 Nikola Mihaylov. All rights reserved.
+
+This repository and its contents, including but not limited to the source code,
+design, styling, animations, text, images and other assets (the "Software"),
+are the proprietary work of the copyright holder.
+
+The source code is made publicly visible for viewing and personal reference
+only. No license or right is granted to any person to use, copy, modify, merge,
+publish, distribute, sublicense, host, deploy or sell the Software, or any
+portion or derivative of it, in whole or in part, for any purpose, commercial
+or non-commercial, without the prior written permission of the copyright holder.
+
+In particular, you may NOT:
+  - deploy or host this website, or a modified version of it, as your own;
+  - reuse its design, layout, content or assets in another project;
+  - sell, resell or redistribute the Software or any derivative work;
+  - remove or alter this notice.
+
+Viewing and forking this repository on GitHub is permitted solely to the extent
+required by the GitHub Terms of Service; doing so grants no further rights.
+
+Third-party libraries used by this project remain under their own respective
+licenses.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR ITS USE.
+
+For permission requests, contact the copyright holder via GitHub:
+https://github.com/nikolamihailov
