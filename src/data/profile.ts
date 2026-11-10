@@ -16,8 +16,8 @@ export const profile: Profile = {
   ],
   location: 'Asenovgrad, Bulgaria',
   email: EMAIL,
-  // Download CV button is hidden until a CV file exists. To enable: put the PDF at
-  // public/cv/Nikola_Mihaylov_CV.pdf and set cvUrl: '/cv/Nikola_Mihaylov_CV.pdf'.
+  // To update the CV, replace public/cv/Nikola_Mihaylov_CV.pdf (keep the name).
+  cvUrl: '/cv/Nikola_Mihaylov_CV.pdf',
   socials: [
     { label: 'GitHub', url: 'https://github.com/nikolamihailov', icon: FiGithub },
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/nikola-mihaylov/', icon: FiLinkedin },
