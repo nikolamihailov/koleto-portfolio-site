@@ -79,7 +79,7 @@ export default function ProjectDetail() {
         </div>
 
         {next !== project && (
-          <Reveal>
+          <Reveal className="project-page__next">
             <Link to={`/projects/${next.slug}`} className="next-project card">
               <span className="next-project__label">Next project</span>
               <span className="next-project__title">

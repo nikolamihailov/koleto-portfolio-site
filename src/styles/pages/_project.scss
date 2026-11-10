@@ -5,7 +5,7 @@
   padding-bottom: 2rem;
 
   &__header {
-    margin-bottom: 2rem;
+    margin-bottom: fluid(2rem, 3rem);
   }
 
   &__meta {
@@ -27,10 +27,16 @@
     font-size: fluid(1.05rem, 1.25rem);
   }
 
+  // Centres the content-sized "Next project" button
+  &__next {
+    display: flex;
+    justify-content: center;
+  }
+
   &__grid {
     display: grid;
     gap: 2rem;
-    margin-top: fluid(2rem, 3.5rem);
+    margin-top: fluid(2.75rem, 5rem);
 
     @include respond-to('lg') {
       grid-template-columns: 1.6fr 1fr;
