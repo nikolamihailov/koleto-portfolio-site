@@ -1,4 +1,7 @@
+import { GenIcon, type IconType } from 'react-icons/lib';
 import {
+  SiNestjs,
+  SiOpenai,
   SiCss3,
   SiDocker,
   SiOpenjdk,
@@ -33,6 +36,9 @@ import {
   SiVite,
 } from 'react-icons/si';
 import {
+  siNestjs,
+  siClaude,
+  siCursor,
   siReact,
   siTypescript,
   siJavascript,
@@ -67,6 +73,17 @@ import {
   siReactrouter,
 } from 'simple-icons';
 import type { Tech, TechId } from './types';
+
+/**
+ * Builds a react-icons component from a simple-icons entry, for logos the installed
+ * react-icons version doesn't ship yet (Claude, Cursor). Same 24×24 viewBox as the
+ * other `Si*` icons, so sizing and colouring behave identically.
+ */
+const fromSimpleIcon = ({ path }: { path: string }): IconType =>
+  GenIcon({ tag: 'svg', attr: { viewBox: '0 0 24 24' }, child: [{ tag: 'path', attr: { d: path }, child: [] }] });
+
+// simple-icons removed OpenAI's logo; this is the colour it last listed for it.
+const OPENAI_HEX = '412991';
 
 /**
  * A brand's official colour (from simple-icons) plus the colour to draw it in on the
@@ -126,4 +143,8 @@ export const tech: Record<TechId, Tech> = {
   mongoose: { name: 'Mongoose', icon: SiMongoose, ...brand(siMongoose) },
   jwt: { name: 'JWT', icon: SiJsonwebtokens, ...brand(siJsonwebtokens) },
   reactrouter: { name: 'React Router', icon: SiReactrouter, ...brand(siReactrouter) },
+  nestjs: { name: 'NestJS', icon: SiNestjs, ...brand(siNestjs) },
+  claude: { name: 'Claude', icon: fromSimpleIcon(siClaude), ...brand(siClaude) },
+  cursor: { name: 'Cursor', icon: fromSimpleIcon(siCursor), ...brand(siCursor) },
+  chatgpt: { name: 'ChatGPT', icon: SiOpenai, ...brand({ hex: OPENAI_HEX }) },
 };

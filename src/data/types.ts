@@ -32,7 +32,11 @@ export type TechId =
   | 'angular'
   | 'mongoose'
   | 'jwt'
-  | 'reactrouter';
+  | 'reactrouter'
+  | 'nestjs'
+  | 'claude'
+  | 'cursor'
+  | 'chatgpt';
 
 export interface Tech {
   name: string;
