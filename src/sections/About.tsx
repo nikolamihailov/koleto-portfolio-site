@@ -18,28 +18,46 @@ export default function About() {
     <section className="section about" id="about">
       <div className="container">
         <SectionHeader index="01" title="About me" />
-        <div className="about__grid">
-          <Reveal className="about__text">
+        <div className={`about__grid ${profile.photo ? 'about__grid--photo' : ''}`}>
+          {profile.photo && (
+            <Reveal className="about__media">
+              <figure className="portrait">
+                <div className="portrait__frame">
+                  <img
+                    src={profile.photo}
+                    alt={`Portrait of ${profile.name}`}
+                    width={400}
+                    height={400}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </figure>
+            </Reveal>
+          )}
+
+          <Reveal className="about__text" delay={0.1}>
             {profile.bio.map((p) => (
               <p key={p}>{p}</p>
             ))}
             <p className="about__location">
               <FiMapPin aria-hidden="true" /> {profile.location}
             </p>
+
+            <ul className="about__stats">
+              {stats.map((s) => (
+                <li key={s.label} className="stat card">
+                  <span className="stat__value">{s.value}</span>
+                  <span className="stat__label">{s.label}</span>
+                </li>
+              ))}
+            </ul>
+
             {profile.cvUrl && (
               <a href={profile.cvUrl} className="btn btn--ghost" download>
                 <FiDownload aria-hidden="true" /> Download CV
               </a>
             )}
-          </Reveal>
-
-          <Reveal className="about__stats" delay={0.15}>
-            {stats.map((s) => (
-              <div key={s.label} className="stat card">
-                <span className="stat__value">{s.value}</span>
-                <span className="stat__label">{s.label}</span>
-              </div>
-            ))}
           </Reveal>
         </div>
       </div>

@@ -4,8 +4,8 @@ import * as THREE from 'three';
 import { useTheme } from '../context/ThemeContext';
 import { useCssVar } from '../hooks/useCssVar';
 
-const RADIUS = 2.1;
-const MOUSE_RADIUS = 0.9;
+const RADIUS = 1.7;
+const MOUSE_RADIUS = 0.8;
 const PUSH = 0.9;
 
 /** Soft round sprite so points render as glowing dots, not squares. */
@@ -134,7 +134,7 @@ export default function HeroScene() {
   const { theme } = useTheme();
   const accent = useCssVar('--accent') || '#00e5ff';
   const supported = useMemo(hasWebGL, []);
-  const count = useMemo(() => (window.innerWidth < 768 ? 2200 : 4200), []);
+  const count = useMemo(() => (window.innerWidth < 768 ? 1800 : 3400), []);
 
   // Pause rendering when the hero is off-screen.
   useEffect(() => {

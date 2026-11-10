@@ -32,6 +32,8 @@ export interface Profile {
   shortName: string;
   initials: string;
   role: string;
+  /** Path to a portrait in /public, e.g. `/images/profile.jpg`. */
+  photo?: string;
   tagline: string;
   bio: string[];
   location: string;

@@ -7,6 +7,7 @@ export const profile: Profile = {
   shortName: 'Nikola',
   initials: 'NM',
   role: 'Full-Stack Developer',
+  photo: '/images/profile.jpg',
   tagline: 'I build fast, accessible and beautifully animated web experiences.',
   bio: [
     'I am a developer who enjoys turning complex problems into clean, intuitive interfaces. I care about performance, accessibility and the small details that make a product feel polished.',
