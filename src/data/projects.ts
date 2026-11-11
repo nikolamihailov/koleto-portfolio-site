@@ -24,6 +24,7 @@ export const projects: Project[] = [
       portfolio('06-project-page'),
       portfolio('07-light'),
       portfolio('08-light-skills'),
+      portfolio('09-bulgarian'),
     ],
     stack: ['react', 'typescript', 'threejs', 'sass', 'framer', 'vite', 'netlify'],
     liveUrl: 'https://koleto.eu',

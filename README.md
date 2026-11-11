@@ -35,6 +35,10 @@ My personal developer portfolio: a fast, fully responsive single-page app with a
 | --- | --- |
 | ![Project page](public/images/projects/portfolio/06-project-page-960.webp) | ![Light theme](public/images/projects/portfolio/07-light-960.webp) |
 
+| Bulgarian | Light theme: skills |
+| --- | --- |
+| ![Bulgarian version](public/images/projects/portfolio/09-bulgarian-960.webp) | ![Light theme: skills](public/images/projects/portfolio/08-light-skills-960.webp) |
+
 ## Tech stack
 
 - **React 18** + **TypeScript**, built with **Vite**
