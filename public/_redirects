@@ -1,1 +1,7 @@
+# Machine-readable paths (e.g. AI agent manifests under /.well-known/) must return a real
+# 404 when the file doesn't exist, instead of falling through to the SPA's index.html
+# with a 200 — tools would otherwise try to parse the HTML as JSON and report errors.
+/.well-known/*  /index.html  404
+
+# SPA fallback: every other path is handled by React Router (static files win first)
 /*    /index.html   200

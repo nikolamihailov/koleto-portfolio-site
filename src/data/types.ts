@@ -37,7 +37,9 @@ export type TechId =
   | 'claude'
   | 'cursor'
   | 'chatgpt'
-  | 'render';
+  | 'render'
+  | 'github'
+  | 'gitlab';
 
 export interface Tech {
   name: string;
