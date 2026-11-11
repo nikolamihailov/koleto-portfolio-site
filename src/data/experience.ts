@@ -11,7 +11,7 @@ export const experience: ExperienceEntry[] = [
     logo: '/images/companies/wiser-technology.webp',
     roles: [
       { id: 'regular', employmentType: 'fullTime', start: '2026-03', stack: ['react', 'nextjs', 'typescript', 'javascript', 'html', 'css'] },
-      { id: 'junior', employmentType: 'fullTime', start: '2025-01', end: '2026-03', stack: ['react', 'nextjs', 'typescript', 'javascript', 'html', 'css'] },
+      { id: 'junior', employmentType: 'fullTime', start: '2025-01', end: '2026-03', stack: ['react', 'typescript', 'javascript', 'html', 'css'] },
       { id: 'intern', employmentType: 'internship', start: '2024-07', end: '2025-01', stack: ['react', 'nextjs', 'typescript', 'javascript', 'html', 'css'] },
     ],
   },
