@@ -93,15 +93,29 @@
     left: 50%;
     bottom: 1.75rem;
     z-index: 1;
-    width: 2.6rem;
-    height: 2.6rem;
-    margin-left: -1.3rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-left: -1.375rem;
     border-radius: 50%;
-    border: 1px solid var(--border-strong);
-    color: var(--text-muted);
+    border: 1.5px solid var(--border-strong);
+    color: var(--text);
+    font-size: 1.15rem;
+    transition:
+      color $duration-base $ease-out,
+      border-color $duration-base $ease-out;
+
+    @include hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
 
     svg {
-      animation: bob 2.2s $ease-in-out infinite;
+      stroke-width: 2.5; // bolder arrow
+      // Sine easing swinging back and forth (alternate): constant, natural motion with
+      // no stall at the ends. The old strong ease-in-out paused at top and bottom.
+      animation: bob 1.1s cubic-bezier(0.37, 0, 0.63, 1) infinite alternate;
+      // Own GPU layer so the small movement is rendered sub-pixel instead of in 1px steps
+      will-change: transform;
 
       @include reduced-motion {
         animation: none;
@@ -148,12 +162,12 @@
   }
 }
 
+// Runs with `alternate`, so it eases from top to bottom and back again smoothly
 @keyframes bob {
-  0%,
-  100% {
-    transform: translateY(-3px);
+  from {
+    transform: translate3d(0, -4px, 0);
   }
-  50% {
-    transform: translateY(4px);
+  to {
+    transform: translate3d(0, 5px, 0);
   }
 }
