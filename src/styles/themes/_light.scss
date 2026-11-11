@@ -8,8 +8,10 @@
   --surface-glass: rgba(255, 255, 255, 0.78);
   --border: rgba(0, 95, 110, 0.14);
   --border-strong: rgba(0, 95, 110, 0.35);
-  --scrollbar-thumb: rgba(0, 82, 93, 0.62); // ≈3.3:1 against --bg
-  --scrollbar-thumb-hover: rgba(0, 82, 93, 0.8);
+  // Solid colours: Chrome draws the standard scrollbar thin, so it needs real contrast
+  --scrollbar-thumb: #4a7279; // ≈5:1 against --bg
+  --scrollbar-thumb-hover: #2f555c;
+  --scrollbar-track: #e2edef;
   --text: #031216;
   --text-muted: #3d5a61;
   --text-subtle: #5f7a81;

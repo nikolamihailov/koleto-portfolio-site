@@ -44,12 +44,22 @@ button {
 // Firefox and Chrome 121+ use the standard properties; older WebKit falls back below.
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb) transparent;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+// The main page scrollbar uses the normal width so it's easy to see and grab;
+// inner scroll areas (e.g. gallery thumbnails) stay thin.
+html {
+  scrollbar-width: auto;
 }
 
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
