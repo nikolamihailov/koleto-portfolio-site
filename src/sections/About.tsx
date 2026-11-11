@@ -39,12 +39,16 @@ export default function About() {
             <Reveal className="about__media">
               <figure className="portrait">
                 <div className="portrait__frame">
-                  {/* The original portrait is 400px, so the 480 variant is the full-res WebP */}
+                  {/* The original portrait is a 498px square: the 720 variant is that full-res
+                      file (never upscaled), the 480 one serves plain 1x screens. The frame is
+                      at most ~400px wide, so 2x/3x screens pick the full-res file. */}
                   <img
-                    src={imgSrc(profile.photo, 480)}
+                    src={imgSrc(profile.photo, 720)}
+                    srcSet={`${imgSrc(profile.photo, 480)} 480w, ${imgSrc(profile.photo, 720)} 498w`}
+                    sizes="(min-width: 1024px) 400px, 340px"
                     alt={t('about.portraitAlt', { name: profile.name })}
-                    width={400}
-                    height={400}
+                    width={498}
+                    height={498}
                     loading="lazy"
                     decoding="async"
                   />
