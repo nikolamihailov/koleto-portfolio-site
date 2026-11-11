@@ -1,0 +1,64 @@
+@use '../abstracts' as *;
+
+// EN | BG segmented switch. Same height and border as the theme toggle next to it.
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  height: 2.6rem;
+  padding: 0.2rem;
+  border-radius: $radius-pill;
+  border: 1px solid var(--border-strong);
+  transition:
+    border-color $duration-base $ease-out,
+    box-shadow $duration-base $ease-out;
+
+  &:focus-within,
+  &:hover {
+    border-color: var(--accent);
+  }
+
+  &__btn {
+    position: relative;
+    @include flex-center;
+    height: 100%;
+    min-width: 2.35rem;
+    padding: 0 0.55rem;
+    border-radius: $radius-pill;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    transition: color $duration-base $ease-out;
+
+    @include hover {
+      color: var(--text);
+    }
+
+    &.is-active {
+      color: var(--accent-contrast);
+      cursor: default;
+    }
+  }
+
+  &__pill {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--accent);
+    box-shadow: 0 0 14px var(--accent-glow);
+  }
+
+  // Above the sliding pill
+  &__code {
+    position: relative;
+  }
+
+  // Desktop: in the navbar. On phones it lives in the menu panel instead.
+  &--nav {
+    display: none;
+
+    @include respond-to('md') {
+      display: inline-flex;
+    }
+  }
+}

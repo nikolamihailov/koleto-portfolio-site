@@ -2,7 +2,8 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import type { PointerEvent } from 'react';
 import { FiArrowUpRight, FiGithub } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import type { Project } from '../data/types';
+import type { LocalizedProject } from '../data/types';
+import { useI18n } from '../i18n/LanguageContext';
 import { loadProjectDetail } from '../pages/lazyPages';
 import { imgSrc, imgSrcSet } from '../utils/images';
 import { revealItem } from './Reveal';
@@ -11,7 +12,8 @@ import { jsAnimated } from '../utils/motion';
 
 const SPRING = { stiffness: 220, damping: 22, mass: 0.6 };
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({ project }: { project: LocalizedProject }) {
+  const { t } = useI18n();
   const { slug, title, summary, images, stack, liveUrl, repoUrl, year } = project;
 
   // Pointer-driven 3D tilt + spotlight glow (fine pointers only, via CSS media query).
@@ -50,7 +52,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       whileHover={{ y: -6 }}
       transition={{ type: 'spring', ...SPRING }}
     >
-      <Link to={`/projects/${slug}`} className="project-card__media" aria-label={`${title} — details`}>
+      <Link to={`/projects/${slug}`} className="project-card__media" aria-label={t('projects.details', { title })}>
         <img
           src={imgSrc(images[0])}
           srcSet={imgSrcSet(images[0])}
@@ -71,7 +73,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         </h3>
         <p className="project-card__summary">{summary}</p>
 
-        <ul className="project-card__stack" aria-label="Tech stack">
+        <ul className="project-card__stack" aria-label={t('common.techStack')}>
           {stack.map((id) => (
             <li key={id}>
               <TechChip id={id} size="sm" />
@@ -82,12 +84,12 @@ export default function ProjectCard({ project }: { project: Project }) {
         <div className="project-card__actions">
           {liveUrl && (
             <a href={liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn--primary btn--sm">
-              Live demo <FiArrowUpRight aria-hidden="true" />
+              {t('common.liveDemo')} <FiArrowUpRight aria-hidden="true" />
             </a>
           )}
           {repoUrl && (
             <a href={repoUrl} target="_blank" rel="noopener noreferrer" className="btn btn--ghost btn--sm">
-              <FiGithub aria-hidden="true" /> View code
+              <FiGithub aria-hidden="true" /> {t('common.viewCode')}
             </a>
           )}
         </div>

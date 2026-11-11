@@ -1,18 +1,20 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { FiMoon, FiSun } from 'react-icons/fi';
 import { useTheme } from '../context/ThemeContext';
+import { useI18n } from '../i18n/LanguageContext';
 import { jsAnimated } from '../utils/motion';
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
+  const { t } = useI18n();
 
   return (
     <button
       type="button"
       className="theme-toggle"
       onClick={toggleTheme}
-      aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
+      aria-label={t(isDark ? 'theme.toLight' : 'theme.toDark')}
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.span

@@ -2,8 +2,8 @@ import { FiDownload, FiMapPin } from 'react-icons/fi';
 import { Reveal } from '../components/Reveal';
 import SectionHeader from '../components/SectionHeader';
 import { experience } from '../data/experience';
-import { profile } from '../data/profile';
 import { projects } from '../data/projects';
+import { useI18n } from '../i18n/LanguageContext';
 import { imgSrc } from '../utils/images';
 
 // Sum the time actually spent at each company (first role start → latest role end).
@@ -18,17 +18,22 @@ const totalMonths = experience.reduce((sum, e) => {
 }, 0);
 const years = Math.floor(totalMonths / 12);
 
-const stats = [
-  { value: years >= 1 ? `${years}+` : `${totalMonths}`, label: years >= 1 ? 'Years of experience' : 'Months of experience' },
-  { value: `${projects.length}+`, label: 'Projects shipped' },
-  { value: `${experience.length}`, label: 'Companies' },
-];
-
 export default function About() {
+  const { t, content } = useI18n();
+  const { profile } = content;
+  const stats = [
+    {
+      value: years >= 1 ? `${years}+` : `${totalMonths}`,
+      label: t(years >= 1 ? 'about.yearsOfExperience' : 'about.monthsOfExperience'),
+    },
+    { value: `${projects.length}+`, label: t('about.projectsShipped') },
+    { value: `${experience.length}`, label: t('about.companies') },
+  ];
+
   return (
     <section className="section about" id="about">
       <div className="container">
-        <SectionHeader index="01" title="About me" />
+        <SectionHeader index="01" title={t('about.title')} />
         <div className={`about__grid ${profile.photo ? 'about__grid--photo' : ''}`}>
           {profile.photo && (
             <Reveal className="about__media">
@@ -37,7 +42,7 @@ export default function About() {
                   {/* The original portrait is 400px, so the 480 variant is the full-res WebP */}
                   <img
                     src={imgSrc(profile.photo, 480)}
-                    alt={`Portrait of ${profile.name}`}
+                    alt={t('about.portraitAlt', { name: profile.name })}
                     width={400}
                     height={400}
                     loading="lazy"
@@ -67,7 +72,7 @@ export default function About() {
 
             {profile.cvUrl && (
               <a href={profile.cvUrl} className="btn btn--ghost" download>
-                <FiDownload aria-hidden="true" /> Download CV
+                <FiDownload aria-hidden="true" /> {t('about.downloadCv')}
               </a>
             )}
           </Reveal>

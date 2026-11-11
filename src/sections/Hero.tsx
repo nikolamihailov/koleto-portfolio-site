@@ -3,7 +3,8 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { FiArrowDown, FiArrowRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { loadHeroScene } from '../components/loadHeroScene';
-import { profile } from '../data/profile';
+import { useI18n } from '../i18n/LanguageContext';
+import { rich } from '../i18n/rich';
 import { jsAnimated } from '../utils/motion';
 
 const HeroScene = lazy(loadHeroScene);
@@ -38,6 +39,8 @@ function useIdleMount() {
 
 export default function Hero() {
   const showScene = useIdleMount();
+  const { t, content } = useI18n();
+  const { profile } = content;
   return (
     <section className="hero" id="home">
       {showScene && (
@@ -48,10 +51,12 @@ export default function Hero() {
 
       <motion.div className="hero__content" variants={group} initial="hidden" animate="show">
         <motion.p {...jsAnimated} variants={item} className="hero__eyebrow">
-          <span className="hero__pulse" aria-hidden="true" /> Available for new opportunities
+          <span className="hero__pulse" aria-hidden="true" /> {t('hero.available')}
         </motion.p>
         <motion.h1 {...jsAnimated} variants={item} className="hero__title">
-          Hi, I&apos;m <span className="hero__name">{profile.shortName}</span>
+          {rich(t('hero.greeting', { name: profile.shortName }), {
+            name: (s) => <span className="hero__name">{s}</span>,
+          })}
           <br />
           {profile.role}.
         </motion.h1>
@@ -60,16 +65,16 @@ export default function Hero() {
         </motion.p>
         <motion.div {...jsAnimated} variants={item} className="hero__actions">
           <Link to={{ pathname: '/', hash: '#projects' }} className="btn btn--primary btn--lg">
-            View projects <FiArrowRight aria-hidden="true" />
+            {t('hero.viewProjects')} <FiArrowRight aria-hidden="true" />
           </Link>
           <a href={`mailto:${profile.email}`} className="btn btn--ghost btn--lg">
-            Contact me
+            {t('hero.contact')}
           </a>
         </motion.div>
         <motion.ul {...jsAnimated} variants={item} className="hero__socials">
-          {profile.socials.map(({ label, url, icon: Icon }) => (
-            <li key={label}>
-              <a href={url} target="_blank" rel="noopener noreferrer" aria-label={label} className="icon-btn">
+          {profile.socials.map(({ id, url, icon: Icon }) => (
+            <li key={id}>
+              <a href={url} target="_blank" rel="noopener noreferrer" aria-label={t(`socials.${id}`)} className="icon-btn">
                 <Icon />
               </a>
             </li>
@@ -81,7 +86,7 @@ export default function Hero() {
         href="#about"
         {...jsAnimated}
         className="hero__scroll"
-        aria-label="Scroll to about"
+        aria-label={t('hero.scrollToAbout')}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 0.8 }}

@@ -2,40 +2,17 @@ import type { ExperienceEntry } from './types';
 
 // Order: newest company first; inside a company, newest role first.
 // The timeline renders newest at the top, so the starting point sits at the bottom.
-// Keep each description to 1–2 sentences.
+// Role titles, descriptions and locations are translated: see `content.experience.<id>`
+// in src/i18n/locales/*.json (keep each description to 1–2 sentences).
 export const experience: ExperienceEntry[] = [
   {
     id: 'wiser',
     company: 'Wiser Technology',
     logo: '/images/companies/wiser-technology.webp',
-    location: 'Remote',
     roles: [
-      {
-        title: 'Regular Full-stack Developer',
-        employmentType: 'Full-time',
-        start: '2026-03',
-        description:
-          'Building and maintaining front-end features for client projects. Driving UI quality and best practices across the team.',
-        stack: ['react', 'typescript', 'javascript'],
-      },
-      {
-        title: 'Junior Full-stack Developer',
-        employmentType: 'Full-time',
-        start: '2025-01',
-        end: '2026-03',
-        description:
-          'Researched and developed libraries to support and enhance project architecture. Consulted internal teams on UI design best practices and front-end development strategies.',
-        stack: ['react', 'javascript'],
-      },
-      {
-        title: 'Full-stack Engineer Intern',
-        employmentType: 'Internship',
-        start: '2024-07',
-        end: '2025-01',
-        description:
-          'Developed a personal full-stack project based on given requirements. Worked closely with other interns on a team project.',
-        stack: ['javascript', 'java'],
-      },
+      { id: 'regular', employmentType: 'fullTime', start: '2026-03', stack: ['react', 'typescript', 'javascript'] },
+      { id: 'junior', employmentType: 'fullTime', start: '2025-01', end: '2026-03', stack: ['react', 'javascript'] },
+      { id: 'intern', employmentType: 'internship', start: '2024-07', end: '2025-01', stack: ['javascript', 'java'] },
     ],
   },
   {
@@ -43,16 +20,6 @@ export const experience: ExperienceEntry[] = [
     company: 'Timag',
     logo: '/images/companies/timag.webp',
     logoFit: 'contain',
-    roles: [
-      {
-        title: 'Front-end Web Developer',
-        employmentType: 'Internship',
-        start: '2022-02',
-        end: '2022-03',
-        description:
-          'Developed a website using a custom template and integrated it into WordPress. Customized and improved the WordPress theme.',
-        stack: ['css', 'php', 'wordpress'],
-      },
-    ],
+    roles: [{ id: 'frontend', employmentType: 'internship', start: '2022-02', end: '2022-03', stack: ['css', 'php', 'wordpress'] }],
   },
 ];

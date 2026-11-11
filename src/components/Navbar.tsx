@@ -2,19 +2,16 @@ import { AnimatePresence, motion, type Variants } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { FiArrowUpRight, FiMenu, FiX } from 'react-icons/fi';
 import { Link, useLocation } from 'react-router-dom';
-import { profile } from '../data/profile';
 import { useActiveSection } from '../hooks/useActiveSection';
+import { useI18n } from '../i18n/LanguageContext';
+import LanguageSwitcher from './LanguageSwitcher';
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
 import { jsAnimated } from '../utils/motion';
 
-const LINKS = [
-  { id: 'about', label: 'About' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'experience', label: 'Experience' },
-];
-const IDS = LINKS.map((l) => l.id);
+// Section ids double as their translation keys (nav.about, nav.projects, …)
+const IDS = ['about', 'projects', 'skills', 'experience'] as const;
+const ACTIVE_IDS = [...IDS];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const panel: Variants = {
@@ -30,7 +27,9 @@ const panelItem: Variants = {
 export default function Navbar() {
   const { pathname } = useLocation();
   const isHome = pathname === '/';
-  const active = useActiveSection(IDS, isHome);
+  const active = useActiveSection(ACTIVE_IDS, isHome);
+  const { t, content } = useI18n();
+  const { profile } = content;
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -63,14 +62,14 @@ export default function Navbar() {
     };
   }, [open]);
 
-  const links = LINKS.map(({ id, label }) => (
+  const links = IDS.map((id) => (
     <li key={id}>
       <Link
         to={{ pathname: '/', hash: `#${id}` }}
         className={`nav__link ${active === id ? 'is-active' : ''}`}
         onClick={() => setOpen(false)}
       >
-        {label}
+        {t(`nav.${id}`)}
         {active === id && <motion.span layoutId="nav-underline" className="nav__underline" />}
       </Link>
     </li>
@@ -78,15 +77,16 @@ export default function Navbar() {
 
   return (
     <header className={`nav ${open ? 'nav--open' : scrolled ? 'nav--scrolled' : ''}`}>
-      <nav className="nav__inner" aria-label="Main">
+      <nav className="nav__inner" aria-label={t('nav.label')}>
         <Logo />
         <ul className="nav__links">{links}</ul>
         <div className="nav__actions">
+          <LanguageSwitcher className="lang-switch--nav" />
           <ThemeToggle />
           <button
             type="button"
             className="nav__burger"
-            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-label={t(open ? 'nav.closeMenu' : 'nav.openMenu')}
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((o) => !o)}
@@ -108,7 +108,7 @@ export default function Navbar() {
             exit="exit"
           >
             <ul className="nav__mobile-links">
-              {LINKS.map(({ id, label }, i) => (
+              {IDS.map((id, i) => (
                 <motion.li key={id} {...jsAnimated} variants={panelItem}>
                   <Link
                     to={{ pathname: '/', hash: `#${id}` }}
@@ -116,20 +116,27 @@ export default function Navbar() {
                     onClick={() => setOpen(false)}
                   >
                     <span className="nav__mobile-index">0{i + 1}</span>
-                    {label}
+                    {t(`nav.${id}`)}
                   </Link>
                 </motion.li>
               ))}
             </ul>
 
+            <motion.div className="nav__mobile-lang" {...jsAnimated} variants={panelItem}>
+              <span className="nav__mobile-lang-label" aria-hidden="true">
+                {t('language.label')}
+              </span>
+              <LanguageSwitcher />
+            </motion.div>
+
             <motion.div className="nav__mobile-footer" {...jsAnimated} variants={panelItem}>
               <a href={`mailto:${profile.email}`} className="btn btn--primary">
-                Get in touch <FiArrowUpRight aria-hidden="true" />
+                {t('common.getInTouch')} <FiArrowUpRight aria-hidden="true" />
               </a>
               <ul className="nav__mobile-socials">
-                {profile.socials.map(({ label, url, icon: Icon }) => (
-                  <li key={label}>
-                    <a href={url} target="_blank" rel="noopener noreferrer" aria-label={label} className="icon-btn">
+                {profile.socials.map(({ id, url, icon: Icon }) => (
+                  <li key={id}>
+                    <a href={url} target="_blank" rel="noopener noreferrer" aria-label={t(`socials.${id}`)} className="icon-btn">
                       <Icon />
                     </a>
                   </li>

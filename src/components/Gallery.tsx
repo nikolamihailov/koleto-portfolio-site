@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, type PanInfo } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { useI18n } from '../i18n/LanguageContext';
 import { imgSrc, imgSrcSet, preloadImage } from '../utils/images';
 import { jsAnimated } from '../utils/motion';
 
@@ -11,6 +12,7 @@ const STAGE_SIZES = '(min-width: 964px) 900px, calc(100vw - 2rem)';
 export default function Gallery({ images, title }: { images: string[]; title: string }) {
   const [[index, dir], setState] = useState<[number, number]>([0, 0]);
   const count = images.length;
+  const { t } = useI18n();
 
   const go = useCallback(
     (step: number) => setState(([i]) => [(i + step + count) % count, step]),
@@ -50,7 +52,7 @@ export default function Gallery({ images, title }: { images: string[]; title: st
             src={imgSrc(images[index], 1600)}
             srcSet={imgSrcSet(images[index])}
             sizes={STAGE_SIZES}
-            alt={`${title} — screenshot ${index + 1} of ${count}`}
+            alt={t('gallery.screenshot', { title, n: index + 1, count })}
             {...jsAnimated}
             className="gallery__image"
             // The first slide is above the fold on the detail page
@@ -75,10 +77,10 @@ export default function Gallery({ images, title }: { images: string[]; title: st
 
         {count > 1 && (
           <>
-            <button type="button" className="gallery__nav gallery__nav--prev" onClick={() => go(-1)} aria-label="Previous image">
+            <button type="button" className="gallery__nav gallery__nav--prev" onClick={() => go(-1)} aria-label={t('gallery.previous')}>
               <FiChevronLeft />
             </button>
-            <button type="button" className="gallery__nav gallery__nav--next" onClick={() => go(1)} aria-label="Next image">
+            <button type="button" className="gallery__nav gallery__nav--next" onClick={() => go(1)} aria-label={t('gallery.next')}>
               <FiChevronRight />
             </button>
             <span className="gallery__counter">
@@ -96,7 +98,7 @@ export default function Gallery({ images, title }: { images: string[]; title: st
                 type="button"
                 className={`gallery__thumb ${i === index ? 'is-active' : ''}`}
                 onClick={() => setState([i, i > index ? 1 : -1])}
-                aria-label={`Show screenshot ${i + 1}`}
+                aria-label={t('gallery.show', { n: i + 1 })}
                 aria-current={i === index}
               >
                 {/* Thumbnails always use the smallest size */}

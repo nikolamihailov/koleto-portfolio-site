@@ -149,6 +149,25 @@
     color: var(--accent);
   }
 
+  // "Language  [EN | BG]" row, between the links and the contact footer
+  &__mobile-lang {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  &__mobile-lang-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
   &__mobile-footer {
     display: flex;
     flex-wrap: wrap;

@@ -4,6 +4,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import ParticlesBackground from './components/ParticlesBackground';
+import { useI18n } from './i18n/LanguageContext';
 import Home from './pages/Home';
 import { NotFound, ProjectDetail } from './pages/lazyPages';
 
@@ -30,10 +31,14 @@ const wait = (ms: number) => new Promise((r) => setTimeout(r, Math.max(0, ms)));
 export default function App() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const { t, lang } = useI18n();
 
   useEffect(() => {
     // Only wait for fonts (preloaded) — the three.js hero loads after the reveal.
-    Promise.all([document.fonts?.ready, wait(MIN_INTRO_MS - performance.now())])
+    // The Cyrillic subset only downloads once Cyrillic text renders, which is after the
+    // intro, so request it up front for Bulgarian to avoid a fallback-font flash.
+    const cyrillic = lang === 'bg' ? document.fonts?.load('1em Inter', 'Б') : undefined;
+    Promise.all([document.fonts?.ready, cyrillic, wait(MIN_INTRO_MS - performance.now())])
       .catch(() => undefined)
       .finally(() => {
         setLoading(false);
@@ -48,7 +53,7 @@ export default function App() {
       {!loading && (
         <>
           <a href="#main" className="skip-link">
-            Skip to content
+            {t('common.skipToContent')}
           </a>
           <Navbar />
           <AnimatePresence mode="wait">

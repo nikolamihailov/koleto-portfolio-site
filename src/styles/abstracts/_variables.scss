@@ -1,5 +1,6 @@
 // Static design tokens (theme-independent)
-$font-display: 'Space Grotesk', system-ui, sans-serif;
+// Space Grotesk has no Cyrillic glyphs, so Bulgarian headings fall back to Inter (which does)
+$font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
 $font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
 $radius-sm: 0.5rem;

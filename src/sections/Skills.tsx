@@ -4,17 +4,19 @@ import { RevealGroup, revealItem } from '../components/Reveal';
 import SectionHeader from '../components/SectionHeader';
 import { skills } from '../data/skills';
 import { tech } from '../data/tech';
+import { useI18n } from '../i18n/LanguageContext';
 import { jsAnimated } from '../utils/motion';
 
 export default function Skills() {
+  const { t } = useI18n();
   return (
     <section className="section" id="skills">
       <div className="container">
-        <SectionHeader index="03" title="Skills" lead="Tools and technologies I work with every day." />
+        <SectionHeader index="03" title={t('skills.title')} lead={t('skills.lead')} />
         <RevealGroup className="skills__grid" stagger={0.1}>
           {skills.map((group) => (
-            <motion.div key={group.title} {...jsAnimated} className="skill-group card" variants={revealItem}>
-              <h3 className="skill-group__title">{group.title}</h3>
+            <motion.div key={group.id} {...jsAnimated} className="skill-group card" variants={revealItem}>
+              <h3 className="skill-group__title">{t(`skills.groups.${group.id}`)}</h3>
               <ul className="skill-group__list">
                 {group.items.map((id) => {
                   const { name, icon: Icon, color, onDark } = tech[id];

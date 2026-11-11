@@ -1,13 +1,31 @@
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
-import { experience } from './src/data/experience';
-import { profile } from './src/data/profile';
 import { projects } from './src/data/projects';
 import { skills } from './src/data/skills';
 import { tech } from './src/data/tech';
+import { getContent } from './src/i18n/content';
+import { findKeyMismatches, LANGS, messages, translate } from './src/i18n/messages';
 import { formatMonth } from './src/utils/date';
 
 const SITE_URL = 'https://koleto.eu';
+
+/**
+ * Fails the build if any locale is missing a key (or has an extra one) compared with
+ * en.json, so a half-translated page can never ship.
+ */
+function i18nCheck(): Plugin {
+  return {
+    name: 'i18n-check',
+    buildStart() {
+      for (const lang of LANGS) {
+        const diff = findKeyMismatches(messages.en, messages[lang]);
+        if (diff.length) this.error(`[i18n] ${lang}.json does not match en.json:\n  ${diff.join('\n  ')}`);
+      }
+      // Throws if a project/role in src/data has no text in some language
+      LANGS.forEach(getContent);
+    },
+  };
+}
 
 /**
  * Emits llms.txt (https://llmstxt.org): a Markdown summary of the site for AI
@@ -18,6 +36,8 @@ function llmsTxt(): Plugin {
     name: 'llms-txt',
     apply: 'build',
     generateBundle() {
+      // llms.txt is written in English
+      const { profile, projects, experience } = getContent('en');
       const names = (ids: (keyof typeof tech)[]) => ids.map((id) => tech[id].name).join(', ');
       const lines = [
         `# ${profile.name} — ${profile.role}`,
@@ -39,19 +59,23 @@ function llmsTxt(): Plugin {
         ...experience.flatMap((e) =>
           e.roles.map(
             (r) =>
-              `- ${r.title} at ${e.company}${e.location ? ` (${e.location})` : ''}, ${formatMonth(r.start)} – ${formatMonth(r.end)}: ${r.description}`,
+              `- ${r.title} at ${e.company}${e.location ? ` (${e.location})` : ''}, ${formatMonth(r.start, 'en')} – ${formatMonth(r.end, 'en')}: ${r.description}`,
           ),
         ),
         '',
         '## Skills',
         '',
-        ...skills.map((g) => `- ${g.title}: ${names(g.items)}`),
+        ...skills.map((g) => `- ${translate('en', `skills.groups.${g.id}`)}: ${names(g.items)}`),
         '',
         '## Contact',
         '',
         `- [Email](mailto:${profile.email})`,
-        ...profile.socials.filter((s) => !s.url.startsWith('mailto:')).map((s) => `- [${s.label}](${s.url})`),
+        ...profile.socials.filter((s) => s.id !== 'email').map((s) => `- [${translate('en', `socials.${s.id}`)}](${s.url})`),
         ...(profile.cvUrl ? [`- [CV (PDF)](${SITE_URL}${profile.cvUrl})`] : []),
+        '',
+        '## Languages',
+        '',
+        'The site is available in English and Bulgarian (switch in the navigation; the choice is remembered).',
         '',
         '## Optional',
         '',
@@ -84,7 +108,7 @@ function sitemap(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [react(), sitemap(), llmsTxt()],
+  plugins: [react(), i18nCheck(), sitemap(), llmsTxt()],
   css: {
     preprocessorOptions: {
       scss: { api: 'modern' },

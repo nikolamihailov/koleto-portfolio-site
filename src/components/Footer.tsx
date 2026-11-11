@@ -1,16 +1,17 @@
 import { FiArrowUpRight } from 'react-icons/fi';
-import { profile } from '../data/profile';
+import { useI18n } from '../i18n/LanguageContext';
+import { rich } from '../i18n/rich';
 import { Reveal } from './Reveal';
 
 export default function Footer() {
+  const { t, content } = useI18n();
+  const { profile } = content;
   return (
     <footer className="footer" id="contact">
       <Reveal className="footer__cta">
-        <h2>
-          Let&apos;s build something <span className="text-accent">great</span> together.
-        </h2>
+        <h2>{rich(t('footer.cta'), { accent: (s) => <span className="text-accent">{s}</span> })}</h2>
         <a href={`mailto:${profile.email}`} className="btn btn--primary btn--lg">
-          Get in touch <FiArrowUpRight aria-hidden="true" />
+          {t('common.getInTouch')} <FiArrowUpRight aria-hidden="true" />
         </a>
       </Reveal>
 
@@ -19,9 +20,9 @@ export default function Footer() {
           © {new Date().getFullYear()} {profile.name}
         </p>
         <ul className="footer__socials">
-          {profile.socials.map(({ label, url, icon: Icon }) => (
-            <li key={label}>
-              <a href={url} target="_blank" rel="noopener noreferrer" aria-label={label} className="icon-btn">
+          {profile.socials.map(({ id, url, icon: Icon }) => (
+            <li key={id}>
+              <a href={url} target="_blank" rel="noopener noreferrer" aria-label={t(`socials.${id}`)} className="icon-btn">
                 <Icon />
               </a>
             </li>
