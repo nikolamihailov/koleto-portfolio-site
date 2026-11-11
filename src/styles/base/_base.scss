@@ -40,20 +40,26 @@ button {
   border: 0;
 }
 
-// Scrollbar
+// Scrollbar — dedicated per-theme tokens (the faint border colour vanished on light).
+// Firefox and Chrome 121+ use the standard properties; older WebKit falls back below.
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--border-strong) transparent;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border-strong);
+  background: var(--scrollbar-thumb);
   border-radius: $radius-pill;
   border: 3px solid var(--bg);
+
+  &:hover {
+    background: var(--scrollbar-thumb-hover);
+  }
 }
 
 @include reduced-motion {
