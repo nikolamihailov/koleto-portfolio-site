@@ -18,6 +18,8 @@ import {
   SiMongoose,
   SiJsonwebtokens,
   SiReactrouter,
+  SiReactquery,
+  SiAxios,
   SiExpress,
   SiFigma,
   SiFramer,
@@ -77,6 +79,8 @@ import {
   siMongoose,
   siJsonwebtokens,
   siReactrouter,
+  siReactquery,
+  siAxios,
 } from 'simple-icons';
 import type { Tech, TechId } from './types';
 
@@ -152,6 +156,8 @@ export const tech: Record<TechId, Tech> = {
   mongoose: { name: 'Mongoose', icon: SiMongoose, ...brand(siMongoose) },
   jwt: { name: 'JWT', icon: SiJsonwebtokens, ...brand(siJsonwebtokens) },
   reactrouter: { name: 'React Router', icon: SiReactrouter, ...brand(siReactrouter) },
+  reactquery: { name: 'TanStack Query', icon: SiReactquery, ...brand(siReactquery) },
+  axios: { name: 'Axios', icon: SiAxios, ...brand(siAxios) },
   nestjs: { name: 'NestJS', icon: SiNestjs, ...brand(siNestjs) },
   claude: { name: 'Claude', icon: fromSimpleIcon(siClaude), ...brand(siClaude) },
   cursor: { name: 'Cursor', icon: fromSimpleIcon(siCursor), ...brand(siCursor) },

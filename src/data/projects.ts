@@ -6,6 +6,7 @@ const tennis = dir('tennis-court');
 const autohub = dir('autohub');
 const kolplace = dir('kolplace');
 const solar = dir('solar-system');
+const sipspot = dir('sipspot');
 
 // Newest first. The first image is the card thumbnail.
 // Summary, description and role are translated: see `content.projects.<slug>` in src/i18n/locales/*.json.
@@ -47,6 +48,25 @@ export const projects: Project[] = [
     stack: ['nextjs', 'typescript', 'tailwind', 'prisma', 'postgresql', 'zod', 'vercel'],
     liveUrl: 'https://tennis-court-asenovgrad.vercel.app',
     repoUrl: 'https://github.com/nikolamihailov/tennis-court-asenovgrad',
+    year: 2026,
+  },
+  {
+    slug: 'sipspot',
+    title: 'SipSpot',
+    images: [
+      sipspot('01-home'),
+      sipspot('02-recipes'),
+      sipspot('03-recipe-detail'),
+      sipspot('04-signature'),
+      sipspot('05-gallery'),
+      sipspot('06-gallery-lightbox'),
+      sipspot('07-testimonials'),
+      sipspot('08-reservation'),
+      sipspot('09-about'),
+    ],
+    stack: ['react', 'typescript', 'reactquery', 'axios', 'reactrouter', 'framer', 'sass', 'vite', 'netlify'],
+    liveUrl: 'https://sipspot.netlify.app/',
+    repoUrl: 'https://github.com/nikolamihailov/React-Projects/tree/main/sipspot',
     year: 2026,
   },
   {

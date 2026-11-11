@@ -156,6 +156,14 @@
           "Staff manage everything from an admin panel with bookings, revenue and occupancy stats, court management (surfaces, working hours, pricing, photos) and user roles. Trainers get their own dashboard for sessions, working hours and time off. Double bookings for both courts and trainers are prevented at the database level with exclusion constraints, and transactional emails go out for confirmations and cancellations."
         ]
       },
+      "sipspot": {
+        "role": "Solo project",
+        "summary": "Website for a cocktail bar with a filterable menu of 290+ real cocktail recipes, recipe pages, a photo gallery and table reservations.",
+        "description": [
+          "SipSpot is a multi-page site for a fictional cocktail bar, built with React and TypeScript. The menu pulls 290+ real recipes from TheCocktailDB API through TanStack Query and Axios, with caching so drinks that were already loaded aren't fetched again.",
+          "Guests can search the menu, filter it by IBA classics, category, base spirit, strength, ingredient and glass, sort it, or let \"Surprise me\" pick a drink. Each cocktail has its own page with ingredients, measures and a step-by-step method, and tapping an ingredient finds more drinks with it. The site also has a signature drinks section, a testimonial carousel, a gallery with a full-screen photo viewer, an about page and a reservations section, all in a warm, luxury look with Framer Motion animations."
+        ]
+      },
       "autohub": {
         "role": "Full-stack developer",
         "summary": "Full-stack car marketplace for browsing, selling and managing car offers, with user and admin roles.",
