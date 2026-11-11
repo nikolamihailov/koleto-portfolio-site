@@ -92,6 +92,17 @@ src/
 - **Promotions:** list several roles under one company (newest first) and they're connected automatically.
 - **New technologies:** add an id to `TechId` in `types.ts`, then an entry in `tech.ts` (icons from `react-icons/si`).
 
+## Forced dark mode in mobile browsers
+
+The site has its own light and dark themes and declares both with `<meta name="color-scheme" content="dark light">`. Some browsers can still repaint pages with their own "force dark" filter:
+
+| Browser | Behaviour |
+| --- | --- |
+| Safari (iOS), Firefox (Android) | No forced dark mode; the site's themes show as designed. |
+| Chrome (Android) | "Auto dark mode for web contents" is opt-in and respects the `color-scheme` meta tag, so it leaves this site alone. |
+| Edge / Opera (Android) | Optional "force dark pages" settings; mostly respect `color-scheme`. |
+| **Samsung Internet** | Its dark mode can repaint sites even when they have their own dark theme. Newer versions' adaptive mode respects `color-scheme`, but the default can still override it, and a site can't fully opt out. Fix on the device: **Settings → Dark mode** (or **Labs**) → turn off **"Force dark mode for web content"** / enable **"Use website dark theme"**. |
+
 ## Deployment (Netlify + custom domain)
 
 1. In Netlify: **Add new site → Import from Git**, then pick this repo. Use build command `npm run build` and publish directory `dist`.
