@@ -12,7 +12,7 @@ My personal developer portfolio: a fast, fully responsive single-page app with a
 - **Intro loader:** "KOLETO" fades in letter by letter, then reveals the site. It's plain HTML/CSS in `index.html`, so it paints before any JavaScript loads.
 - **Interactive 3D hero:** a particle sphere (three.js / React Three Fiber) that assembles on load, breathes, and parts exactly under the cursor. It loads on idle after the page appears.
 - **Ambient particle background:** a lightweight 2D canvas of drifting, connected particles across every page.
-- **English & Bulgarian:** every piece of text, including project and experience content, is translated. An EN | BG switch sits in the navbar (and in the mobile menu); the choice is remembered, and browsers set to Bulgarian get it by default. Translations are type-checked, and the build fails if the two languages ever drift apart.
+- **English & Bulgarian:** every piece of text, including project and experience content, is translated. An EN | BG switch sits in the navbar (and in the mobile menu); the site always opens in English, and a switch to Bulgarian is remembered for later visits. Translations are type-checked, and the build fails if the two languages ever drift apart.
 - **Light & dark themes:** high-contrast cyan palette, saved preference, no flash of the wrong theme, smooth cross-fade (View Transitions API).
 - **Projects:** cards with tech chips, icons, **Live demo** and **View code** buttons, a 3D tilt and a cursor spotlight. Each project has its own page (`/projects/:slug`) with a swipeable gallery.
 - **Experience timeline:** an alternating left/right timeline with promotions grouped under one company (LinkedIn-style). The line fills as you scroll.

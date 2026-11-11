@@ -14,8 +14,8 @@ interface I18nContextValue {
 
 const I18nContext = createContext<I18nContextValue | null>(null);
 
-// index.html picks the language before first paint (saved choice, else the browser's
-// languages) and writes it to <html lang>, so React starts in the right language.
+// index.html picks the language before first paint (English, unless the visitor chose
+// Bulgarian on an earlier visit) and writes it to <html lang>, so React starts in it.
 const readInitial = (): Lang => {
   const lang = document.documentElement.lang;
   return isLang(lang) ? lang : DEFAULT_LANG;
@@ -28,11 +28,6 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   useLayoutEffect(() => {
     document.documentElement.lang = lang;
-    try {
-      localStorage.setItem('lang', lang);
-    } catch {
-      /* storage unavailable */
-    }
     document.title = translate(lang, 'meta.title');
     document.querySelector('meta[name="description"]')?.setAttribute('content', translate(lang, 'meta.description'));
   }, [lang]);
@@ -40,6 +35,12 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const setLang = useCallback(
     (next: Lang) => {
       if (next === lang) return;
+      // Only an explicit choice is remembered; first visits always start in English.
+      try {
+        localStorage.setItem('lang', next);
+      } catch {
+        /* storage unavailable */
+      }
       const apply = () => flushSync(() => setLangState(next));
       const doc = document as ViewTransitionDoc;
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

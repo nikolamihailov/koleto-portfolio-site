@@ -40,14 +40,12 @@
         }
       })();
 
-      // Pick the language before the app loads: the saved choice, else Bulgarian for
-      // browsers set to Bulgarian, else English. React reads it back from <html lang>.
+      // Pick the language before the app loads: English by default, or the language the
+      // visitor chose on an earlier visit. React reads it back from <html lang>.
       (function () {
         var lang = 'en';
         try {
-          var saved = localStorage.getItem('lang');
-          if (saved === 'en' || saved === 'bg') lang = saved;
-          else if ((navigator.languages || [navigator.language]).some(function (l) { return /^bg\b/i.test(l); })) lang = 'bg';
+          if (localStorage.getItem('lang') === 'bg') lang = 'bg';
         } catch (e) {}
         document.documentElement.lang = lang;
         if (lang === 'bg') {
