@@ -59,7 +59,9 @@
   "project": {
     "back": "Всички проекти",
     "overview": "Общ преглед",
-    "next": "Следващ проект"
+    "next": "Следващ проект",
+    "previous": "Предишен проект",
+    "navLabel": "Още проекти"
   },
   "gallery": {
     "screenshot": "{title} — екранна снимка {n} от {count}",

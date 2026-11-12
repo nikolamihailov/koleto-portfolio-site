@@ -14,16 +14,18 @@ interface RevealProps {
   children: ReactNode;
   className?: string;
   delay?: number;
-  as?: 'div' | 'section' | 'li' | 'article' | 'header';
+  as?: 'div' | 'section' | 'li' | 'article' | 'header' | 'nav';
+  'aria-label'?: string;
 }
 
 /** Fades + slides content in once it scrolls into view. */
-export function Reveal({ children, className, delay = 0, as = 'div' }: RevealProps) {
+export function Reveal({ children, className, delay = 0, as = 'div', 'aria-label': ariaLabel }: RevealProps) {
   const Tag = motion[as];
   return (
     <Tag
       {...jsAnimated}
       className={className}
+      aria-label={ariaLabel}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}

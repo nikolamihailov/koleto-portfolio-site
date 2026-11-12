@@ -32,7 +32,9 @@ export default function ProjectDetail() {
   if (!project) return <NotFound />;
 
   const idx = projects.indexOf(project);
-  const next = projects[(idx + 1) % projects.length];
+  // No wrap-around: the first project has no "previous", the last no "next"
+  const prev = projects[idx - 1];
+  const next = projects[idx + 1];
   const { title, summary, description, images, stack, liveUrl, repoUrl, year, role } = project;
 
   return (
@@ -87,14 +89,34 @@ export default function ProjectDetail() {
           </Reveal>
         </div>
 
-        {next !== project && (
-          <Reveal className="project-page__next">
-            <Link to={`/projects/${next.slug}`} className="next-project card">
-              <span className="next-project__label">{t('project.next')}</span>
-              <span className="next-project__title">
-                {next.title} <FiArrowRight aria-hidden="true" />
-              </span>
-            </Link>
+        {(prev || next) && (
+          <Reveal
+            as="nav"
+            className={`project-page__nav ${prev && next ? '' : 'project-page__nav--single'}`}
+            aria-label={t('project.navLabel')}
+          >
+            {prev && (
+              <Link to={`/projects/${prev.slug}`} className="next-project next-project--prev card" rel="prev">
+                <span className="next-project__label">{t('project.previous')}</span>
+                <span className="next-project__title">
+                  <FiArrowLeft aria-hidden="true" />
+                  <span className="next-project__name" title={prev.title}>
+                    {prev.title}
+                  </span>
+                </span>
+              </Link>
+            )}
+            {next && (
+              <Link to={`/projects/${next.slug}`} className="next-project next-project--next card" rel="next">
+                <span className="next-project__label">{t('project.next')}</span>
+                <span className="next-project__title">
+                  <span className="next-project__name" title={next.title}>
+                    {next.title}
+                  </span>
+                  <FiArrowRight aria-hidden="true" />
+                </span>
+              </Link>
+            )}
           </Reveal>
         )}
       </div>

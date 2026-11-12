@@ -59,7 +59,9 @@
   "project": {
     "back": "All projects",
     "overview": "Overview",
-    "next": "Next project"
+    "next": "Next project",
+    "previous": "Previous project",
+    "navLabel": "More projects"
   },
   "gallery": {
     "screenshot": "{title} — screenshot {n} of {count}",

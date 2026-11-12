@@ -198,15 +198,28 @@
   }
 }
 
-// ---------- Next project ----------
+// ---------- Previous / next project ----------
 .next-project {
-  // Size to its content instead of stretching across the container
-  display: inline-flex;
+  // Fills its grid column so previous and next are always the same width
+  display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  max-width: 100%;
-  margin-top: 4rem;
-  padding: 1.25rem 2.25rem 1.25rem 1.75rem;
+  min-width: 0;
+  padding: 1.25rem 1.75rem;
+
+  &--prev {
+    grid-column: 1;
+  }
+
+  // Stays on the right even when there is no previous project
+  &--next {
+    align-items: flex-end;
+    text-align: right;
+
+    @include respond-to('md') {
+      grid-column: 2;
+    }
+  }
 
   &__label {
     font-size: 0.8rem;
@@ -219,13 +232,23 @@
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
+    max-width: 100%;
     font-family: $font-display;
-    font-size: fluid(1.4rem, 2rem);
+    font-size: fluid(1.3rem, 1.65rem);
     font-weight: 600;
 
     svg {
+      flex-shrink: 0;
       transition: transform $duration-base $ease-out;
     }
+  }
+
+  // Long names end in "…" instead of widening the card
+  &__name {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   @include hover {
@@ -238,6 +261,14 @@
 
     svg {
       transform: translateX(6px);
+    }
+  }
+
+  &--prev {
+    @include hover {
+      svg {
+        transform: translateX(-6px);
+      }
     }
   }
 }
