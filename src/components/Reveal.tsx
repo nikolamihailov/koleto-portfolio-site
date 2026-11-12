@@ -1,5 +1,6 @@
 import { motion, type Variants } from 'framer-motion';
-import type { ReactNode } from 'react';
+import { createContext, useContext, type ReactNode } from 'react';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 import { jsAnimated } from '../utils/motion';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -36,6 +37,27 @@ export function Reveal({ children, className, delay = 0, as = 'div' }: RevealPro
   );
 }
 
+// Trigger on a fixed offset, not a ratio: `amount` is relative to the element's
+// height, and a tall stacked grid on mobile would need hundreds of px on screen
+// before revealing, leaving an apparently empty section.
+const VIEWPORT = { once: true, amount: 'some', margin: '0px 0px -80px 0px' } as const;
+
+/** Below this width grids stack into one column, so items reveal one by one. */
+const STACKED_QUERY = '(max-width: 767px)';
+
+const IndividualReveal = createContext(false);
+
+/**
+ * Props for a direct child of `RevealGroup`. On wide screens the group staggers
+ * its children; when the grid is stacked each child reveals as it scrolls in.
+ */
+export function useRevealItem() {
+  const individual = useContext(IndividualReveal);
+  return individual
+    ? ({ variants: revealItem, initial: 'hidden', whileInView: 'show', viewport: VIEWPORT } as const)
+    : ({ variants: revealItem } as const);
+}
+
 /** Staggers its `revealItem` children as the group scrolls into view. */
 export function RevealGroup({
   children,
@@ -49,12 +71,23 @@ export function RevealGroup({
   as?: 'div' | 'ul';
 }) {
   const Tag = motion[as];
+  const individual = useMediaQuery(STACKED_QUERY);
+
+  if (individual) {
+    const Plain = as;
+    return (
+      <IndividualReveal.Provider value>
+        <Plain className={className}>{children}</Plain>
+      </IndividualReveal.Provider>
+    );
+  }
+
   return (
     <Tag
       className={className}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={VIEWPORT}
       variants={{ hidden: {}, show: { transition: { staggerChildren: stagger } } }}
     >
       {children}

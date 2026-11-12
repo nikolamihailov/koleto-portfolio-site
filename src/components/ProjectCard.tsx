@@ -6,7 +6,7 @@ import type { LocalizedProject } from '../data/types';
 import { useI18n } from '../i18n/LanguageContext';
 import { loadProjectDetail } from '../pages/lazyPages';
 import { imgSrc, imgSrcSet } from '../utils/images';
-import { revealItem } from './Reveal';
+import { useRevealItem } from './Reveal';
 import TechChip from './TechChip';
 import { jsAnimated } from '../utils/motion';
 
@@ -14,6 +14,7 @@ const SPRING = { stiffness: 220, damping: 22, mass: 0.6 };
 
 export default function ProjectCard({ project }: { project: LocalizedProject }) {
   const { t } = useI18n();
+  const revealProps = useRevealItem();
   const { slug, title, summary, images, stack, liveUrl, repoUrl, year } = project;
 
   // Pointer-driven 3D tilt + spotlight glow (fine pointers only, via CSS media query).
@@ -41,7 +42,7 @@ export default function ProjectCard({ project }: { project: LocalizedProject }) 
     <motion.article
       className="project-card"
       {...jsAnimated}
-      variants={revealItem}
+      {...revealProps}
       style={{ rotateX, rotateY, transformPerspective: 1000 }}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
