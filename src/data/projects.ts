@@ -28,7 +28,7 @@ export const projects: Project[] = [
       portfolio('09-bulgarian'),
     ],
     stack: ['react', 'typescript', 'threejs', 'sass', 'framer', 'vite', 'netlify'],
-    liveUrl: 'https://koleto.eu',
+    // No liveUrl: this is the site itself, a "Live demo" link would just loop back here
     repoUrl: 'https://github.com/nikolamihailov/koleto-portfolio-site',
     year: 2026,
   },
