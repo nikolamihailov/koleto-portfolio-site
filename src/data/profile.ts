@@ -6,6 +6,7 @@ const EMAIL = 'nikolam0612@gmail.com';
 
 export const profile: Profile = {
   initials: 'NM',
+  birthDate: '2000-12-06',
   photo: '/images/profile/profile',
   email: EMAIL,
   // To update the CV, replace public/cv/Nikola_Mihaylov_CV.pdf (keep the name).

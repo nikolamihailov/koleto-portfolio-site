@@ -60,6 +60,8 @@ export interface Tech {
 
 export interface Profile {
   initials: string;
+  /** "YYYY-MM-DD"; fills `{age}` in the bio so it never needs a yearly edit. */
+  birthDate: string;
   /** Base path of the portrait from the image pipeline (images-src/profile/), e.g. `/images/profile/profile`. */
   photo?: string;
   email: string;
@@ -74,6 +76,7 @@ export interface ProfileText {
   role: string;
   tagline: string;
   location: string;
+  /** Paragraphs; `{name}` and `{age}` are filled in from the profile. */
   bio: string[];
 }
 

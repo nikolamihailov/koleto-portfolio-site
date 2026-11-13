@@ -5,6 +5,13 @@ const parse = (ym: string) => {
   return { y, m };
 };
 
+/** Full years since `birthDate` ("YYYY-MM-DD"), counting the birthday itself as reached. */
+export const ageOn = (birthDate: string, today = new Date()) => {
+  const [y, m, d] = birthDate.split('-').map(Number);
+  const hadBirthday = today.getMonth() + 1 > m || (today.getMonth() + 1 === m && today.getDate() >= d);
+  return today.getFullYear() - y - (hadBirthday ? 0 : 1);
+};
+
 /** "Mar 2026" / "март 2026"; no date means the role is current ("Present" / "досега"). */
 export const formatMonth = (ym: string | undefined, lang: Lang) => {
   if (!ym) return translate(lang, 'experience.present');

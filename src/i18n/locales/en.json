@@ -124,7 +124,7 @@
       "tagline": "I build fast, accessible and beautifully animated web experiences.",
       "location": "Asenovgrad, Bulgaria",
       "bio": [
-        "I am a developer who enjoys turning complex problems into clean, intuitive interfaces. I care about performance, accessibility and the small details that make a product feel polished.",
+        "My name is {name} and I am {age} years old. I am a developer who enjoys turning complex problems into clean, intuitive interfaces. I care about performance, accessibility and the small details that make a product feel polished.",
         "When I am not coding, you will usually find me training, hiking in the mountains or flying my drone to capture views from above."
       ]
     },

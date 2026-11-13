@@ -8,6 +8,7 @@ import type {
   LocalizedProject,
   ProjectText,
 } from '../data/types';
+import { ageOn } from '../utils/date';
 import { messages, type Lang } from './messages';
 
 export interface Content {
@@ -26,7 +27,13 @@ function build(lang: Lang): Content {
   const experienceText = text.experience as Record<string, ExperienceText>;
 
   return {
-    profile: { ...profile, ...text.profile },
+    profile: {
+      ...profile,
+      ...text.profile,
+      bio: text.profile.bio.map((p) =>
+        p.replace(/\{name\}/g, text.profile.name).replace(/\{age\}/g, String(ageOn(profile.birthDate))),
+      ),
+    },
     projects: projects.map((p) => ({ ...p, ...(projectText[p.slug] ?? missing(lang, `projects.${p.slug}`)) })),
     experience: experience.map((entry) => {
       const t = experienceText[entry.id] ?? missing(lang, `experience.${entry.id}`);
