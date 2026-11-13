@@ -1,0 +1,16 @@
+# Netlify response headers. Without these every file is served with max-age=0,
+# so browsers re-check everything on every visit.
+
+# Vite build output: file names contain a content hash, so a changed file always
+# gets a new URL and these can be cached forever.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts rarely change, but their names are not hashed: cache for 30 days.
+/fonts/*
+  Cache-Control: public, max-age=2592000
+
+# Images keep their names when replaced (e.g. a new screenshot), so cache for a
+# week and revalidate after that instead of pinning an old version for a year.
+/images/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
