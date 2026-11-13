@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useId } from 'react';
 import { useI18n } from '../i18n/LanguageContext';
 import { LANGS, messages } from '../i18n/messages';
@@ -28,7 +28,7 @@ export default function LanguageSwitcher({ className = '' }: { className?: strin
             onClick={() => setLang(code)}
           >
             {active && (
-              <motion.span
+              <m.span
                 layoutId={pillId}
                 className="lang-switch__pill"
                 transition={{ type: 'spring', stiffness: 500, damping: 35 }}

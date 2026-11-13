@@ -1,10 +1,10 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import type { ReactNode } from 'react';
 import { jsAnimated } from '../utils/motion';
 
 export default function PageTransition({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <motion.main
+    <m.main
       {...jsAnimated}
       id="main"
       className={className}
@@ -14,6 +14,6 @@ export default function PageTransition({ children, className }: { children: Reac
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
-    </motion.main>
+    </m.main>
   );
 }

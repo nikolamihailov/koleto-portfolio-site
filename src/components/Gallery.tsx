@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, type PanInfo } from 'framer-motion';
+import { AnimatePresence, m, type PanInfo } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { useI18n } from '../i18n/LanguageContext';
@@ -44,7 +44,7 @@ export default function Gallery({ images, title }: { images: string[]; title: st
             images can overlap. mode="popLayout" re-mounted the entering image when the
             exit finished, replaying its fade-in (visible as a twitch). */}
         <AnimatePresence initial={false} custom={dir}>
-          <motion.img
+          <m.img
             key={index}
             src={imgSrc(images[index], 1600)}
             srcSet={imgSrcSet(images[index])}

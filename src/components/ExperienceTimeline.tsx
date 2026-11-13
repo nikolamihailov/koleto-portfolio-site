@@ -1,4 +1,4 @@
-import { motion, useMotionValueEvent, useScroll, useSpring } from 'framer-motion';
+import { m, useMotionValueEvent, useScroll, useSpring } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { FiFlag, FiMapPin } from 'react-icons/fi';
 import type { LocalizedExperienceEntry } from '../data/types';
@@ -36,7 +36,7 @@ function CompanyCard({ entry, side }: { entry: LocalizedExperienceEntry; side: '
   const multi = roles.length > 1;
 
   return (
-    <motion.article
+    <m.article
       {...jsAnimated}
       className={`xp-card xp-card--${side}`}
       initial={{ opacity: 0, x: side === 'left' ? -48 : 48 }}
@@ -107,7 +107,7 @@ function CompanyCard({ entry, side }: { entry: LocalizedExperienceEntry; side: '
           );
         })}
       </ol>
-    </motion.article>
+    </m.article>
   );
 }
 
@@ -132,7 +132,7 @@ export default function ExperienceTimeline({ entries }: { entries: LocalizedExpe
   return (
     <div ref={ref} className="timeline">
       <div className="timeline__track" aria-hidden="true">
-        <motion.div className="timeline__fill" style={{ scaleY: fill }} />
+        <m.div className="timeline__fill" style={{ scaleY: fill }} />
       </div>
 
       <div className="timeline__cap timeline__cap--top">
@@ -144,7 +144,7 @@ export default function ExperienceTimeline({ entries }: { entries: LocalizedExpe
           const side = i % 2 === 0 ? 'left' : 'right';
           return (
             <li key={entry.id} className={`timeline__item timeline__item--${side}`}>
-              <motion.span
+              <m.span
                 {...jsAnimated}
                 className="timeline__node"
                 initial={{ scale: 0.4, opacity: 0 }}
@@ -153,7 +153,7 @@ export default function ExperienceTimeline({ entries }: { entries: LocalizedExpe
                 transition={{ type: 'spring', stiffness: 260, damping: 18 }}
               >
                 <CompanyLogo entry={entry} />
-              </motion.span>
+              </m.span>
               <CompanyCard entry={entry} side={side} />
             </li>
           );

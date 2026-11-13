@@ -1,5 +1,5 @@
 /**
- * Spread onto a motion component that animates opacity: `<motion.div {...jsAnimated} … />`.
+ * Spread onto a motion component that animates opacity: `<m.div {...jsAnimated} … />`.
  *
  * Framer Motion normally hands opacity (and filter/clip-path) animations to the browser's
  * Web Animations API. When such an animation finishes, Firefox removes it a frame before

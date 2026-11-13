@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { RevealGroup, useRevealItem } from '../components/Reveal';
 import SectionHeader from '../components/SectionHeader';
 import { skills } from '../data/skills';
@@ -27,13 +27,13 @@ export default function Skills() {
 function SkillGroup({ title, items }: { title: string; items: TechId[] }) {
   const revealProps = useRevealItem();
   return (
-    <motion.div {...jsAnimated} className="skill-group card" {...revealProps}>
+    <m.div {...jsAnimated} className="skill-group card" {...revealProps}>
       <h3 className="skill-group__title">{title}</h3>
       <ul className="skill-group__list">
         {items.map((id) => {
           const { name, icon: Icon, color, onDark } = tech[id];
           return (
-            <motion.li
+            <m.li
               key={id}
               className="skill"
               style={{ '--brand': color, '--brand-on-dark': onDark } as CSSProperties}
@@ -42,10 +42,10 @@ function SkillGroup({ title, items }: { title: string; items: TechId[] }) {
             >
               <Icon className="skill__icon" aria-hidden="true" />
               <span>{name}</span>
-            </motion.li>
+            </m.li>
           );
         })}
       </ul>
-    </motion.div>
+    </m.div>
   );
 }

@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { m, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import type { PointerEvent } from 'react';
 import { FiArrowUpRight, FiGithub } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
@@ -39,7 +39,7 @@ export default function ProjectCard({ project }: { project: LocalizedProject }) 
   };
 
   return (
-    <motion.article
+    <m.article
       className="project-card"
       {...jsAnimated}
       {...revealProps}
@@ -95,6 +95,6 @@ export default function ProjectCard({ project }: { project: LocalizedProject }) 
           )}
         </div>
       </div>
-    </motion.article>
+    </m.article>
   );
 }

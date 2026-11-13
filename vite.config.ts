@@ -123,7 +123,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           three: ['three', '@react-three/fiber'],
-          vendor: ['react', 'react-dom', 'react-router-dom', 'framer-motion'],
+          vendor: ['react', 'react-dom', 'react-router-dom'],
         },
       },
     },

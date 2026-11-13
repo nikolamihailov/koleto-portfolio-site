@@ -1,4 +1,4 @@
-import { AnimatePresence, MotionConfig } from 'framer-motion';
+import { AnimatePresence, LazyMotion, MotionConfig } from 'framer-motion';
 import { Suspense, useEffect, useState, type ReactNode } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Footer from './components/Footer';
@@ -28,6 +28,11 @@ const Lazy = ({ children }: { children: ReactNode }) => (
 );
 const wait = (ms: number) => new Promise((r) => setTimeout(r, Math.max(0, ms)));
 
+// Animation features download in parallel with the intro, which covers the page
+// until well after they arrive. Components use the lightweight `m.*`; `strict`
+// throws in development if a full `motion.*` component slips back in.
+const loadMotionFeatures = () => import('./utils/motionFeatures').then((mod) => mod.default);
+
 export default function App() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
@@ -49,39 +54,41 @@ export default function App() {
   }, []);
 
   return (
-    <MotionConfig reducedMotion="user">
-      <ParticlesBackground />
+    <LazyMotion features={loadMotionFeatures} strict>
+      <MotionConfig reducedMotion="user">
+        <ParticlesBackground />
 
-      {!loading && (
-        <>
-          <a href="#main" className="skip-link">
-            {t('common.skipToContent')}
-          </a>
-          <Navbar />
-          <AnimatePresence mode="wait">
-            <Routes location={location} key={location.pathname}>
-              <Route path="/" element={<Home />} />
-              <Route
-                path="/projects/:slug"
-                element={
-                  <Lazy>
-                    <ProjectDetail />
-                  </Lazy>
-                }
-              />
-              <Route
-                path="*"
-                element={
-                  <Lazy>
-                    <NotFound />
-                  </Lazy>
-                }
-              />
-            </Routes>
-          </AnimatePresence>
-          <Footer />
-        </>
-      )}
-    </MotionConfig>
+        {!loading && (
+          <>
+            <a href="#main" className="skip-link">
+              {t('common.skipToContent')}
+            </a>
+            <Navbar />
+            <AnimatePresence mode="wait">
+              <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<Home />} />
+                <Route
+                  path="/projects/:slug"
+                  element={
+                    <Lazy>
+                      <ProjectDetail />
+                    </Lazy>
+                  }
+                />
+                <Route
+                  path="*"
+                  element={
+                    <Lazy>
+                      <NotFound />
+                    </Lazy>
+                  }
+                />
+              </Routes>
+            </AnimatePresence>
+            <Footer />
+          </>
+        )}
+      </MotionConfig>
+    </LazyMotion>
   );
 }

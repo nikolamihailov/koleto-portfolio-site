@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { FiMoon, FiSun } from 'react-icons/fi';
 import { useTheme } from '../context/ThemeContext';
 import { useI18n } from '../i18n/LanguageContext';
@@ -17,7 +17,7 @@ export default function ThemeToggle() {
       aria-label={t(isDark ? 'theme.toLight' : 'theme.toDark')}
     >
       <AnimatePresence mode="wait" initial={false}>
-        <motion.span
+        <m.span
           key={theme}
           {...jsAnimated}
           className="theme-toggle__icon"
@@ -27,7 +27,7 @@ export default function ThemeToggle() {
           transition={{ type: 'spring', stiffness: 400, damping: 22 }}
         >
           {isDark ? <FiMoon /> : <FiSun />}
-        </motion.span>
+        </m.span>
       </AnimatePresence>
     </button>
   );

@@ -1,4 +1,4 @@
-import { motion, type Variants } from 'framer-motion';
+import { m, type Variants } from 'framer-motion';
 import { createContext, useContext, type ReactNode } from 'react';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 import { jsAnimated } from '../utils/motion';
@@ -20,7 +20,7 @@ interface RevealProps {
 
 /** Fades + slides content in once it scrolls into view. */
 export function Reveal({ children, className, delay = 0, as = 'div', 'aria-label': ariaLabel }: RevealProps) {
-  const Tag = motion[as];
+  const Tag = m[as];
   return (
     <Tag
       {...jsAnimated}
@@ -72,7 +72,7 @@ export function RevealGroup({
   stagger?: number;
   as?: 'div' | 'ul';
 }) {
-  const Tag = motion[as];
+  const Tag = m[as];
   const individual = useMediaQuery(STACKED_QUERY);
 
   if (individual) {

@@ -1,4 +1,4 @@
-import { motion, type Variants } from 'framer-motion';
+import { m, type Variants } from 'framer-motion';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { FiArrowDown, FiArrowRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
@@ -49,29 +49,29 @@ export default function Hero() {
         </Suspense>
       )}
 
-      <motion.div className="hero__content" variants={group} initial="hidden" animate="show">
-        <motion.p {...jsAnimated} variants={item} className="hero__eyebrow">
+      <m.div className="hero__content" variants={group} initial="hidden" animate="show">
+        <m.p {...jsAnimated} variants={item} className="hero__eyebrow">
           <span className="hero__pulse" aria-hidden="true" /> {t('hero.available')}
-        </motion.p>
-        <motion.h1 {...jsAnimated} variants={item} className="hero__title">
+        </m.p>
+        <m.h1 {...jsAnimated} variants={item} className="hero__title">
           {rich(t('hero.greeting', { name: profile.shortName }), {
             name: (s) => <span className="hero__name">{s}</span>,
           })}
           <br />
           {profile.role}.
-        </motion.h1>
-        <motion.p {...jsAnimated} variants={item} className="hero__tagline">
+        </m.h1>
+        <m.p {...jsAnimated} variants={item} className="hero__tagline">
           {profile.tagline}
-        </motion.p>
-        <motion.div {...jsAnimated} variants={item} className="hero__actions">
+        </m.p>
+        <m.div {...jsAnimated} variants={item} className="hero__actions">
           <Link to={{ pathname: '/', hash: '#projects' }} className="btn btn--primary btn--lg">
             {t('hero.viewProjects')} <FiArrowRight aria-hidden="true" />
           </Link>
           <a href={`mailto:${profile.email}`} className="btn btn--ghost btn--lg">
             {t('hero.contact')}
           </a>
-        </motion.div>
-        <motion.ul {...jsAnimated} variants={item} className="hero__socials">
+        </m.div>
+        <m.ul {...jsAnimated} variants={item} className="hero__socials">
           {profile.socials.map(({ id, url, icon: Icon }) => (
             <li key={id}>
               <a
@@ -85,10 +85,10 @@ export default function Hero() {
               </a>
             </li>
           ))}
-        </motion.ul>
-      </motion.div>
+        </m.ul>
+      </m.div>
 
-      <motion.a
+      <m.a
         href="#about"
         {...jsAnimated}
         className="hero__scroll"
@@ -98,7 +98,7 @@ export default function Hero() {
         transition={{ delay: 1.4, duration: 0.8 }}
       >
         <FiArrowDown />
-      </motion.a>
+      </m.a>
     </section>
   );
 }

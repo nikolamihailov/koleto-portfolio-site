@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, type Variants } from 'framer-motion';
+import { AnimatePresence, m, type Variants } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { FiArrowUpRight, FiMenu, FiX } from 'react-icons/fi';
 import { Link, useLocation } from 'react-router-dom';
@@ -70,7 +70,7 @@ export default function Navbar() {
         onClick={() => setOpen(false)}
       >
         {t(`nav.${id}`)}
-        {active === id && <motion.span layoutId="nav-underline" className="nav__underline" />}
+        {active === id && <m.span layoutId="nav-underline" className="nav__underline" />}
       </Link>
     </li>
   ));
@@ -98,7 +98,7 @@ export default function Navbar() {
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             id="mobile-menu"
             className="nav__mobile"
             {...jsAnimated}
@@ -109,7 +109,7 @@ export default function Navbar() {
           >
             <ul className="nav__mobile-links">
               {IDS.map((id, i) => (
-                <motion.li key={id} {...jsAnimated} variants={panelItem}>
+                <m.li key={id} {...jsAnimated} variants={panelItem}>
                   <Link
                     to={{ pathname: '/', hash: `#${id}` }}
                     className={`nav__mobile-link ${active === id ? 'is-active' : ''}`}
@@ -118,18 +118,18 @@ export default function Navbar() {
                     <span className="nav__mobile-index">0{i + 1}</span>
                     {t(`nav.${id}`)}
                   </Link>
-                </motion.li>
+                </m.li>
               ))}
             </ul>
 
-            <motion.div className="nav__mobile-lang" {...jsAnimated} variants={panelItem}>
+            <m.div className="nav__mobile-lang" {...jsAnimated} variants={panelItem}>
               <span className="nav__mobile-lang-label" aria-hidden="true">
                 {t('language.label')}
               </span>
               <LanguageSwitcher />
-            </motion.div>
+            </m.div>
 
-            <motion.div className="nav__mobile-footer" {...jsAnimated} variants={panelItem}>
+            <m.div className="nav__mobile-footer" {...jsAnimated} variants={panelItem}>
               <a href={`mailto:${profile.email}`} className="btn btn--primary">
                 {t('common.getInTouch')} <FiArrowUpRight aria-hidden="true" />
               </a>
@@ -148,8 +148,8 @@ export default function Navbar() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>
