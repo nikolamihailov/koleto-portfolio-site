@@ -251,6 +251,38 @@
     text-overflow: ellipsis;
   }
 
+  // Phones: compact, centred tiles side by side; names wrap to two lines
+  @include respond-below('md') {
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0.9rem 0.75rem;
+    text-align: center;
+
+    &__label {
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+    }
+
+    &__title {
+      gap: 0.4rem;
+      font-size: 1.05rem;
+    }
+
+    &__name {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      white-space: normal;
+      text-wrap: balance;
+    }
+
+    &--next {
+      grid-column: 2;
+    }
+  }
+
   @include hover {
     border-color: var(--accent);
     box-shadow: var(--shadow-hover);
