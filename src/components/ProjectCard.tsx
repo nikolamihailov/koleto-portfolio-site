@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import type { LocalizedProject } from '../data/types';
 import { useI18n } from '../i18n/LanguageContext';
 import { loadProjectDetail } from '../pages/lazyPages';
-import { imgSrc, imgSrcSet } from '../utils/images';
+import { GALLERY_SIZES, imgSrc, imgSrcSet, preloadImage } from '../utils/images';
 import { useRevealItem } from './Reveal';
 import TechChip from './TechChip';
 import { jsAnimated } from '../utils/motion';
@@ -38,6 +38,13 @@ export default function ProjectCard({ project }: { project: LocalizedProject }) 
     py.set(0.5);
   };
 
+  // Fetch the detail page code and its first gallery image before the click,
+  // so navigation feels instant and the gallery doesn't open empty
+  const prefetch = () => {
+    loadProjectDetail();
+    preloadImage(images[0], GALLERY_SIZES);
+  };
+
   return (
     <m.article
       className="project-card"
@@ -46,10 +53,9 @@ export default function ProjectCard({ project }: { project: LocalizedProject }) 
       style={{ rotateX, rotateY, transformPerspective: 1000 }}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
-      // Fetch the detail page code before the click so navigation feels instant
-      onPointerEnter={loadProjectDetail}
-      onFocus={loadProjectDetail}
-      onTouchStart={loadProjectDetail}
+      onPointerEnter={prefetch}
+      onFocus={prefetch}
+      onTouchStart={prefetch}
       whileHover={{ y: -6 }}
       transition={{ type: 'spring', ...SPRING }}
     >

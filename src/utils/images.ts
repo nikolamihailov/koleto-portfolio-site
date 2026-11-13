@@ -9,6 +9,12 @@ export const imgSrc = (base: string, width: Width = 960) => `${base}-${width}.we
 
 export const imgSrcSet = (base: string) => IMAGE_WIDTHS.map((w) => `${imgSrc(base, w)} ${w}w`).join(', ');
 
+/**
+ * `sizes` for the main gallery image. The gallery is capped at 900px (see _gallery.scss);
+ * below that it spans the width minus gutters. Shared so preloads pick the same file.
+ */
+export const GALLERY_SIZES = '(min-width: 964px) 900px, calc(100vw - 2rem)';
+
 /** Warm the browser cache for an image (e.g. the next gallery slide). */
 export const preloadImage = (base: string, sizes: string) => {
   const img = new Image();

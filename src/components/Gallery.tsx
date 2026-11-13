@@ -2,12 +2,10 @@ import { AnimatePresence, m, type PanInfo } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { useI18n } from '../i18n/LanguageContext';
-import { imgSrc, imgSrcSet, preloadImage } from '../utils/images';
+import { GALLERY_SIZES as STAGE_SIZES, imgSrc, imgSrcSet, preloadImage } from '../utils/images';
 import { jsAnimated } from '../utils/motion';
 
 const SWIPE = 60;
-// The gallery is capped at 900px (see _gallery.scss); below that it spans the width minus gutters.
-const STAGE_SIZES = '(min-width: 964px) 900px, calc(100vw - 2rem)';
 
 export default function Gallery({ images, title }: { images: string[]; title: string }) {
   const [[index, dir], setState] = useState<[number, number]>([0, 0]);
@@ -105,6 +103,9 @@ export default function Gallery({ images, title }: { images: string[]; title: st
                 type="button"
                 className={`gallery__thumb ${i === index ? 'is-active' : ''}`}
                 onClick={() => setState([i, i > index ? 1 : -1])}
+                // Start loading the full-size slide before the click lands
+                onPointerEnter={() => preloadImage(src, STAGE_SIZES)}
+                onFocus={() => preloadImage(src, STAGE_SIZES)}
                 aria-label={t('gallery.show', { n: i + 1 })}
                 aria-current={i === index}
               >

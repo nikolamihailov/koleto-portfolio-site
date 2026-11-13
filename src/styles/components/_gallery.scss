@@ -25,6 +25,9 @@
     height: 100%;
     object-fit: cover;
     object-position: top;
+    // Hides the alt text the browser paints while a slide is still downloading
+    // (screen readers still read it); the stage background shows instead.
+    color: transparent;
     cursor: grab;
     touch-action: pan-y;
     user-select: none;
