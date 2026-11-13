@@ -36,7 +36,10 @@ export type Vars = Record<string, string | number>;
 const lookup = (source: unknown, key: string) =>
   key
     .split('.')
-    .reduce<unknown>((node, part) => (node && typeof node === 'object' ? (node as Record<string, unknown>)[part] : undefined), source);
+    .reduce<unknown>(
+      (node, part) => (node && typeof node === 'object' ? (node as Record<string, unknown>)[part] : undefined),
+      source,
+    );
 
 /**
  * Returns the message for `key` in `lang`, falling back to English and then to the key itself.
@@ -53,7 +56,8 @@ export function translate(lang: Lang, key: MessageKey, vars?: Vars): string {
 export function findKeyMismatches(a: unknown, b: unknown, path = ''): string[] {
   const isObj = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
   if (!isObj(a) || !isObj(b)) {
-    if (Array.isArray(a) && Array.isArray(b) && a.length !== b.length) return [`${path} (array length ${a.length} vs ${b.length})`];
+    if (Array.isArray(a) && Array.isArray(b) && a.length !== b.length)
+      return [`${path} (array length ${a.length} vs ${b.length})`];
     return isObj(a) !== isObj(b) ? [path] : [];
   }
   const keys = new Set([...Object.keys(a), ...Object.keys(b)]);

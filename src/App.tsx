@@ -44,6 +44,8 @@ export default function App() {
         setLoading(false);
         dismissBootLoader();
       });
+    // Runs once for the intro; a later language switch must not replay it
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

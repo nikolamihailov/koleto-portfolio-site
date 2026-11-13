@@ -22,7 +22,13 @@ export default function Footer() {
         <ul className="footer__socials">
           {profile.socials.map(({ id, url, icon: Icon }) => (
             <li key={id}>
-              <a href={url} target="_blank" rel="noopener noreferrer" aria-label={t(`socials.${id}`)} className="icon-btn">
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t(`socials.${id}`)}
+                className="icon-btn"
+              >
                 <Icon />
               </a>
             </li>

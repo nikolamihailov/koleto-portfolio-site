@@ -14,10 +14,7 @@ export default function Gallery({ images, title }: { images: string[]; title: st
   const count = images.length;
   const { t } = useI18n();
 
-  const go = useCallback(
-    (step: number) => setState(([i]) => [(i + step + count) % count, step]),
-    [count],
-  );
+  const go = useCallback((step: number) => setState(([i]) => [(i + step + count) % count, step]), [count]);
 
   // Preload the neighbouring slides so arrows/swipes show the next image instantly.
   useEffect(() => {
@@ -77,10 +74,20 @@ export default function Gallery({ images, title }: { images: string[]; title: st
 
         {count > 1 && (
           <>
-            <button type="button" className="gallery__nav gallery__nav--prev" onClick={() => go(-1)} aria-label={t('gallery.previous')}>
+            <button
+              type="button"
+              className="gallery__nav gallery__nav--prev"
+              onClick={() => go(-1)}
+              aria-label={t('gallery.previous')}
+            >
               <FiChevronLeft />
             </button>
-            <button type="button" className="gallery__nav gallery__nav--next" onClick={() => go(1)} aria-label={t('gallery.next')}>
+            <button
+              type="button"
+              className="gallery__nav gallery__nav--next"
+              onClick={() => go(1)}
+              aria-label={t('gallery.next')}
+            >
               <FiChevronRight />
             </button>
             <span className="gallery__counter">

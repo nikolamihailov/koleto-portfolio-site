@@ -13,9 +13,7 @@
     text-align: center;
     border-radius: $radius-lg;
     border: 1px solid var(--border);
-    background:
-      radial-gradient(120% 120% at 50% 0%, var(--accent-soft), transparent 60%),
-      var(--surface);
+    background: radial-gradient(120% 120% at 50% 0%, var(--accent-soft), transparent 60%), var(--surface);
 
     h2 {
       max-width: 18ch;

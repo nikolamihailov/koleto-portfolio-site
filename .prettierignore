@@ -1,0 +1,7 @@
+dist
+public
+images-src
+package-lock.json
+# Hand-formatted: compact inline CSS for the boot intro, and README tables
+index.html
+*.md

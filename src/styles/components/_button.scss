@@ -94,7 +94,9 @@
   color: var(--text-muted);
   font-weight: 500;
   margin-bottom: 2rem;
-  transition: color $duration-fast, gap $duration-base $ease-out;
+  transition:
+    color $duration-fast,
+    gap $duration-base $ease-out;
 
   @include hover {
     color: var(--accent);

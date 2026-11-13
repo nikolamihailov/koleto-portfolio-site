@@ -70,7 +70,9 @@ function llmsTxt(): Plugin {
         '## Contact',
         '',
         `- [Email](mailto:${profile.email})`,
-        ...profile.socials.filter((s) => s.id !== 'email').map((s) => `- [${translate('en', `socials.${s.id}`)}](${s.url})`),
+        ...profile.socials
+          .filter((s) => s.id !== 'email')
+          .map((s) => `- [${translate('en', `socials.${s.id}`)}](${s.url})`),
         ...(profile.cvUrl ? [`- [CV (PDF)](${SITE_URL}${profile.cvUrl})`] : []),
         '',
         '## Languages',

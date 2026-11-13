@@ -33,7 +33,10 @@ async function* walk(dir) {
   }
 }
 
-const mtime = (p) => stat(p).then((s) => s.mtimeMs).catch(() => 0);
+const mtime = (p) =>
+  stat(p)
+    .then((s) => s.mtimeMs)
+    .catch(() => 0);
 
 let made = 0;
 let skipped = 0;

@@ -10,9 +10,26 @@ export const experience: ExperienceEntry[] = [
     company: 'Wiser Technology',
     logo: '/images/companies/wiser-technology.webp',
     roles: [
-      { id: 'regular', employmentType: 'fullTime', start: '2026-03', stack: ['react', 'nextjs', 'nestjs', 'typescript', 'javascript', 'html', 'css'] },
-      { id: 'junior', employmentType: 'fullTime', start: '2025-01', end: '2026-03', stack: ['react', 'typescript', 'javascript', 'html', 'css'] },
-      { id: 'intern', employmentType: 'internship', start: '2024-07', end: '2025-01', stack: ['react', 'nextjs', 'typescript', 'javascript', 'html', 'css'] },
+      {
+        id: 'regular',
+        employmentType: 'fullTime',
+        start: '2026-03',
+        stack: ['react', 'nextjs', 'nestjs', 'typescript', 'javascript', 'html', 'css'],
+      },
+      {
+        id: 'junior',
+        employmentType: 'fullTime',
+        start: '2025-01',
+        end: '2026-03',
+        stack: ['react', 'typescript', 'javascript', 'html', 'css'],
+      },
+      {
+        id: 'intern',
+        employmentType: 'internship',
+        start: '2024-07',
+        end: '2025-01',
+        stack: ['react', 'nextjs', 'typescript', 'javascript', 'html', 'css'],
+      },
     ],
   },
   {
@@ -20,6 +37,14 @@ export const experience: ExperienceEntry[] = [
     company: 'Timag',
     logo: '/images/companies/timag.webp',
     logoFit: 'contain',
-    roles: [{ id: 'frontend', employmentType: 'internship', start: '2022-02', end: '2022-03', stack: ['css', 'php', 'wordpress'] }],
+    roles: [
+      {
+        id: 'frontend',
+        employmentType: 'internship',
+        start: '2022-02',
+        end: '2022-03',
+        stack: ['css', 'php', 'wordpress'],
+      },
+    ],
   },
 ];

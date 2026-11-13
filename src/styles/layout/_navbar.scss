@@ -103,9 +103,7 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     // Fully opaque, with a soft accent glow so it doesn't feel flat
-    background:
-      radial-gradient(120% 60% at 100% 0%, var(--accent-soft), transparent 60%),
-      var(--bg);
+    background: radial-gradient(120% 60% at 100% 0%, var(--accent-soft), transparent 60%), var(--bg);
 
     @include respond-to('md') {
       display: none;

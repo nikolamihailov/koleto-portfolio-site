@@ -99,7 +99,8 @@ export const projects: Project[] = [
     ],
     stack: ['react', 'reactrouter', 'framer', 'node', 'express', 'mongodb', 'mongoose', 'jwt'],
     liveUrl: 'https://kolplace.netlify.app/',
-    repoUrl: 'https://github.com/nikolamihailov/React-Projects/tree/main/kolplace%20-%20Final%20React%20Project%20SoftUni',
+    repoUrl:
+      'https://github.com/nikolamihailov/React-Projects/tree/main/kolplace%20-%20Final%20React%20Project%20SoftUni',
     year: 2024,
   },
   {
