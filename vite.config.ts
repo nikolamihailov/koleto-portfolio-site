@@ -1,5 +1,8 @@
-import { defineConfig, type Plugin } from 'vite';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { join, resolve } from 'node:path';
 import react from '@vitejs/plugin-react';
+import sharp from 'sharp';
+import { defineConfig, type Plugin } from 'vite';
 import { projects } from './src/data/projects';
 import { skills } from './src/data/skills';
 import { tech } from './src/data/tech';
@@ -109,8 +112,71 @@ function sitemap(): Plugin {
   };
 }
 
+const escapeHtml = (s: string) =>
+  s.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+
+/**
+ * Link previews for project pages. Crawlers that build previews (LinkedIn, WhatsApp,
+ * Slack, Facebook…) don't run JavaScript, so on a plain SPA every /projects/<slug>
+ * link shows the home page's title and image. This writes projects/<slug>.html: a
+ * copy of the built index.html whose <head> describes that project, plus a
+ * 1200×630 preview image cut from its first screenshot. Netlify serves the file for
+ * /projects/<slug> ahead of the SPA fallback; in the browser the app runs as usual.
+ */
+function projectPreviews(): Plugin {
+  let outDir = 'dist';
+  return {
+    name: 'project-previews',
+    apply: 'build',
+    configResolved(config) {
+      outDir = resolve(config.root, config.build.outDir);
+    },
+    async closeBundle() {
+      const template = await readFile(join(outDir, 'index.html'), 'utf8');
+      await mkdir(join(outDir, 'projects'), { recursive: true });
+      await mkdir(join(outDir, 'og'), { recursive: true });
+
+      // Previews are in English, like the default page
+      for (const p of getContent('en').projects) {
+        const url = `${SITE_URL}/projects/${p.slug}`;
+        const title = escapeHtml(translate('en', 'meta.projectTitle', { project: p.title }));
+        const description = escapeHtml(p.summary);
+        const image = `${SITE_URL}/og/${p.slug}.jpg`;
+
+        // Each pattern must match exactly once, so a change to index.html can't
+        // silently leave a page with the home page's tags.
+        const replacements: [RegExp, string][] = [
+          [/<title>[^<]*<\/title>/, `<title>${title}</title>`],
+          [/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${description}" />`],
+          [/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${url}" />`],
+          [/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${url}" />`],
+          [/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${title}" />`],
+          [
+            /<meta property="og:description" content="[^"]*" \/>/,
+            `<meta property="og:description" content="${description}" />`,
+          ],
+          [/<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="${image}" />`],
+        ];
+        let html = template;
+        for (const [pattern, value] of replacements) {
+          if (!pattern.test(html)) this.error(`[project-previews] index.html has no tag matching ${pattern}`);
+          html = html.replace(pattern, value);
+        }
+        await writeFile(join(outDir, 'projects', `${p.slug}.html`), html);
+
+        // Top of the first screenshot (usually the hero), cropped to the 1.91:1 preview ratio
+        const screenshot = join(outDir, `${p.images[0]}-1600.webp`);
+        await sharp(screenshot)
+          .resize(1200, 630, { fit: 'cover', position: 'top' })
+          .jpeg({ quality: 82, mozjpeg: true })
+          .toFile(join(outDir, 'og', `${p.slug}.jpg`));
+      }
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [react(), i18nCheck(), sitemap(), llmsTxt()],
+  plugins: [react(), i18nCheck(), sitemap(), llmsTxt(), projectPreviews()],
   css: {
     preprocessorOptions: {
       scss: { api: 'modern' },
