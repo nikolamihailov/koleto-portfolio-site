@@ -89,8 +89,8 @@ export const projects: Project[] = [
     slug: 'kolplace',
     title: 'KolPlace',
     images: [
-      kolplace('01-home-tvs-dark'),
       kolplace('02-home-tvs'),
+      kolplace('01-home-tvs-dark'),
       kolplace('03-product-dark'),
       kolplace('04-product-reviews-dark'),
       kolplace('05-cart-dark'),
