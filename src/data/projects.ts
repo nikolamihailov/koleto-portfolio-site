@@ -98,7 +98,7 @@ export const projects: Project[] = [
       kolplace('07-login'),
     ],
     stack: ['react', 'reactrouter', 'framer', 'node', 'express', 'mongodb', 'mongoose', 'jwt'],
-    liveUrl: 'https://kolplace.netlify.app/',
+    liveUrl: 'https://kolplace-one.vercel.app/',
     repoUrl:
       'https://github.com/nikolamihailov/React-Projects/tree/main/kolplace%20-%20Final%20React%20Project%20SoftUni',
     year: 2024,
