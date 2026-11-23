@@ -7,12 +7,23 @@ const autohub = dir('autohub');
 const kolplace = dir('kolplace');
 const solar = dir('solar-system');
 const sipspot = dir('sipspot');
+const docdrop = dir('docdrop');
 
 // Newest first. The first image is the card thumbnail.
 // Summary, description and role are translated: see `content.projects.<slug>` in src/i18n/locales/*.json.
 // Put original screenshots in /images-src/projects/<project>/ and run `npm run images`;
 // reference them here by name without extension (see src/utils/images.ts).
 export const projects: Project[] = [
+  {
+    slug: 'docdrop',
+    title: 'DocDrop',
+    images: [docdrop('01-summary'), docdrop('02-upload'), docdrop('03-file-selected'), docdrop('04-summary-details')],
+    stack: ['react', 'typescript', 'tailwind', 'vite', 'node', 'express', 'vercel'],
+    liveUrl: 'https://docdrop-ashy.vercel.app/',
+    repoUrl: 'https://github.com/nikolamihailov/DocDrop',
+    year: 2026,
+    status: 'inProgress',
+  },
   {
     slug: 'koleto-portfolio',
     title: 'Koleto Portfolio',
@@ -84,6 +95,7 @@ export const projects: Project[] = [
     liveUrl: 'https://autohub-k.netlify.app/home',
     repoUrl: 'https://github.com/nikolamihailov/AutoHub',
     year: 2025,
+    status: 'rebuilding',
   },
   {
     slug: 'kolplace',

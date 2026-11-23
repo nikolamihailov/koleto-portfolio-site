@@ -80,6 +80,54 @@
     border-radius: $radius-pill;
     @include glass;
     color: var(--text);
+
+    // The top-right corner belongs to the status ribbon
+    &--start {
+      right: auto;
+      left: 0.85rem;
+    }
+  }
+
+  // Diagonal corner ribbon ("In progress", "Rebuilding"). The media box clips it.
+  // Its centre sits on the corner's 45° diagonal, `--c` from both the top and right
+  // edges, so the label is centred in the visible band. A bigger `--c` = a longer band
+  // (the visible centre line is 2√2·c long), which the Bulgarian labels need.
+  &__ribbon {
+    --c: 3.6rem;
+    --w: 14rem;
+    --h: 1.6rem;
+    position: absolute;
+    top: calc(var(--c) - var(--h) / 2);
+    right: calc(var(--c) - var(--w) / 2);
+    z-index: 1;
+    width: var(--w);
+    height: var(--h);
+    transform: rotate(45deg);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    // letter-spacing also trails the last letter; indent by the same so the text stays centred
+    text-indent: 0.08em;
+    line-height: var(--h);
+    white-space: nowrap;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+
+    &--inProgress {
+      background: var(--accent);
+      color: var(--accent-contrast);
+    }
+
+    // Construction-tape stripes
+    &--rebuilding {
+      background: repeating-linear-gradient(-45deg, #f5c400 0 12px, #1a1a1a 12px 24px);
+      color: #fff;
+      text-shadow:
+        0 0 3px #000,
+        0 0 6px #000;
+    }
   }
 
   &__body {

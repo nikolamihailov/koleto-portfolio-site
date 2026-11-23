@@ -54,7 +54,11 @@
   "projects": {
     "title": "Projects",
     "lead": "A selection of things I have designed and built.",
-    "details": "{title} — details"
+    "details": "{title} — details",
+    "status": {
+      "inProgress": "In progress",
+      "rebuilding": "Rebuilding"
+    }
   },
   "project": {
     "back": "All projects",
@@ -129,6 +133,14 @@
       ]
     },
     "projects": {
+      "docdrop": {
+        "role": "Full-stack developer",
+        "summary": "Upload a PDF, Word or text document and get a short, structured AI summary in seconds.",
+        "description": [
+          "DocDrop is a React and Express app, written in TypeScript on both sides and styled with Tailwind CSS. You drop in a PDF, DOCX, TXT or Markdown file; the server extracts its text, splits long documents into overlapping chunks and has an LLM summarize them, merging chunk summaries map-reduce style. The result is rendered as Markdown with the model, time, token count and number of chunks.",
+          "It talks to any OpenAI-compatible API, so switching between Google Gemini, Groq or a local Ollama model is a config change. I built it to learn how LLM apps work under the hood, and it is the base for the next steps: embeddings, vector search and chatting with your documents (RAG)."
+        ]
+      },
       "koleto-portfolio": {
         "role": "Design & development",
         "summary": "This site: a personal portfolio with an interactive three.js hero, light/dark themes and smooth scroll animations.",

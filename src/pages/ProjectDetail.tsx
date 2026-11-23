@@ -35,7 +35,7 @@ export default function ProjectDetail() {
   // No wrap-around: the first project has no "previous", the last no "next"
   const prev = projects[idx - 1];
   const next = projects[idx + 1];
-  const { title, summary, description, images, stack, liveUrl, repoUrl, year, role } = project;
+  const { title, summary, description, images, stack, liveUrl, repoUrl, year, role, status } = project;
 
   return (
     <PageTransition className="project-page">
@@ -48,6 +48,7 @@ export default function ProjectDetail() {
           <p className="project-page__meta">
             {year}
             {role && <> · {role}</>}
+            {status && <> · {t(`projects.status.${status}`)}</>}
           </p>
           <h1 className="project-page__title">{title}</h1>
           <p className="project-page__summary">{summary}</p>

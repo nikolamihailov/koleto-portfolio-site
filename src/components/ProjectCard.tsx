@@ -15,7 +15,7 @@ const SPRING = { stiffness: 220, damping: 22, mass: 0.6 };
 export default function ProjectCard({ project }: { project: LocalizedProject }) {
   const { t } = useI18n();
   const revealProps = useRevealItem();
-  const { slug, title, summary, images, stack, liveUrl, repoUrl, year } = project;
+  const { slug, title, summary, images, stack, liveUrl, repoUrl, year, status } = project;
 
   // Pointer-driven 3D tilt + spotlight glow (fine pointers only, via CSS media query).
   const px = useMotionValue(0.5);
@@ -71,7 +71,12 @@ export default function ProjectCard({ project }: { project: LocalizedProject }) 
           loading="lazy"
           decoding="async"
         />
-        <span className="project-card__year">{year}</span>
+        <span className={`project-card__year${status ? ' project-card__year--start' : ''}`}>{year}</span>
+        {status && (
+          <span className={`project-card__ribbon project-card__ribbon--${status}`}>
+            {t(`projects.status.${status}`)}
+          </span>
+        )}
       </Link>
 
       <div className="project-card__body">

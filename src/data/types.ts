@@ -93,7 +93,11 @@ export interface Project {
   liveUrl?: string;
   repoUrl?: string;
   year: number;
+  /** Shown as a diagonal ribbon on the card; label in `projects.status.<value>`. */
+  status?: ProjectStatus;
 }
+
+export type ProjectStatus = 'inProgress' | 'rebuilding';
 
 export interface ProjectText {
   role?: string;
