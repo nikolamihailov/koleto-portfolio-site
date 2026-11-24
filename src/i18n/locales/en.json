@@ -135,10 +135,10 @@
     "projects": {
       "docdrop": {
         "role": "Full-stack developer",
-        "summary": "Upload a PDF, Word or text document and get a short, structured AI summary in seconds.",
+        "summary": "Upload a PDF, Word or text document, get a structured AI summary, then chat with it and get answers with sources.",
         "description": [
-          "DocDrop is a React and Express app, written in TypeScript on both sides and styled with Tailwind CSS. You drop in a PDF, DOCX, TXT or Markdown file; the server extracts its text, splits long documents into overlapping chunks and has an LLM summarize them, merging chunk summaries map-reduce style. The result is rendered as Markdown with the model, time, token count and number of chunks.",
-          "It talks to any OpenAI-compatible API, so switching between Google Gemini, Groq or a local Ollama model is a config change. I built it to learn how LLM apps work under the hood, and it is the base for the next steps: embeddings, vector search and chatting with your documents (RAG)."
+          "DocDrop is a React and Express app, written in TypeScript on both sides and styled with Tailwind CSS. You drop in a PDF, DOCX, TXT or Markdown file and the server extracts its text and picks the best route for summarizing it: short documents go to Groq, long ones go to Google Gemini in a single call, and if that fails it falls back to summarizing chunk by chunk and merging the results (map-reduce). Progress streams to the page, and the summary is rendered as Markdown with the model, time, token count and number of chunks.",
+          "Next to the summary there is a chat about the document, built with RAG (retrieval-augmented generation). The text is split into passages and each one gets an embedding; for every question the app finds the most relevant passages and has the LLM answer only from them, citing its sources. Answers stream in as they are written, and follow-up questions are rewritten so they make sense on their own. I am still working on it: next up are keeping documents and chats across reloads, several documents at once and a real vector database."
         ]
       },
       "koleto-portfolio": {
