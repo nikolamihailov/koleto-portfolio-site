@@ -17,7 +17,7 @@ export const projects: Project[] = [
   {
     slug: 'docdrop',
     title: 'DocDrop',
-    images: [docdrop('01-chat'), docdrop('02-summary'), docdrop('03-upload'), docdrop('04-file-selected')],
+    images: [docdrop('01-upload'), docdrop('02-chat'), docdrop('03-summary'), docdrop('04-file-selected')],
     stack: ['react', 'typescript', 'tailwind', 'vite', 'node', 'express', 'vercel'],
     liveUrl: 'https://docdrop-ashy.vercel.app/',
     repoUrl: 'https://github.com/nikolamihailov/DocDrop',
