@@ -121,7 +121,7 @@ export const projects: Project[] = [
   {
     slug: 'solar-system-planets',
     title: 'Solar System Planets',
-    images: [solar('01-overview'), solar('02-saturn'), solar('03-mars')],
+    images: [solar('01-home'), solar('02-saturn'), solar('03-mars')],
     stack: ['react', 'typescript', 'threejs', 'vite'],
     liveUrl: 'https://planets-sl.netlify.app/',
     repoUrl: 'https://github.com/nikolamihailov/React-Projects/tree/main/solar-system-planets',
